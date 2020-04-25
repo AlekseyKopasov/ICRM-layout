@@ -10,7 +10,7 @@
   "license": "ISC",
   "scripts": {
     "editorconfig": "editorconfig-cli",
-    "lint:css": "stylelint \"source/sass/blocks/**/*.scss\"",
+    "lint:css": "stylelint \"source/sass/blocks/**/*.scss\" --config ./.stylelintrc-format",
     "format:css": "prettier --write \"source/sass/blocks/**/*.scss\" && stylelint \"source/sass/blocks/**/*.scss\" --fix --config ./.stylelintrc-format",
     "eslint": "npx eslint .",
     "test": "npm run editorconfig && npm run lint:css && npx eslint .",
@@ -73,8 +73,9 @@
   },
   "lint-staged": {
     "linters": {
-      "*.scss": [
+      "source/sass/blocks/**/*.scss": [
         "prettier --write",
+        "stylelint --fix --config ./.stylelintrc-format",
         "git add"
       ]
     }
