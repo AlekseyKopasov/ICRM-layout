@@ -1,23 +1,25 @@
-$width-max:       1920px;
+$width-max: 1920px;
 $width-desktop-m: 1600px;
-$width-desktop:   1440px;
-$width-laptop:    1024px;
-$width-tablet:    768px;
-$width-mobile-l:  465px;
-$width-min:       320px;
+$width-desktop: 1440px;
+$width-laptop: 1024px;
+$width-tablet: 768px;
+$width-mobile-l: 465px;
+$width-min: 320px;
 
-$retina-dpi:      144dpi;
-$retina-dppx:     1.5dppx;
+$retina-dpi: 144dpi;
+$retina-dppx: 1.5dppx;
 
-$main-font: "PT Sans", "Arial", sans-serif;
-$title-font: "Tenor Sans", "Arial", sans-serif;
+$main-font: 'PT Sans', 'Arial', sans-serif;
+$title-font: 'Tenor Sans', 'Arial', sans-serif;
 
 $font-base: 20px;
 $font-base-line-height: 24px;
 
-$color-orange:       #fe5200;
+$color-text-black: #010101;
+$color-bg-base: #ffffff;
+
+$color-orange: #fe5200;
 $color-white-simple: #f2eae7;
-$color-black-two:    #010101;
 
 $color-pale-grey: #eff3f6;
 $color-greyish: #b7b7b7;

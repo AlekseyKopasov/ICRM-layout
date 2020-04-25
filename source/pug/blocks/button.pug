@@ -1,16 +1,1 @@
 mixin button(text, props)
-  - let className
-    case props.styleType
-      when 'dark'
-        -className = 'button button--dark'
-      when 'dark-inverse'
-        -className = 'button button--dark-inverse'
-      when 'light'
-      default
-        -className = 'button'
-    -className = props.additionalClassName ? className + ' ' + props.additionalClassName : className;
-    if (props.isLink)
-      a(class!= className href!= props.href ? props.href : '#')= text
-    else
-      button(class!= className type!= props.type ? props.type : 'button')= text
-

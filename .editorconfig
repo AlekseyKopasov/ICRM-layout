@@ -20,3 +20,19 @@ trim_trailing_whitespace = true
 
 [*.md]
 trim_trailing_whitespace = false
+
+[search.exclude]
+.svn
+.git
+.hg
+.sass-cache
+.tmp
+node_modules
+CVS
+public/assets
+core/*/vendor
+apps/*/*/core
+apps/*/*/vendor
+.sources
+newrelic_agent.log
+source/lib/

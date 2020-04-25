@@ -1,4 +1,4 @@
-extends ../global/empty-layout
+extends ../layouts/empty-layout
 
 block variables
   -
@@ -8,3 +8,9 @@ block variables
 
 block content
   p.test Lorem
+
+  .row
+    .input-field.col.s6
+      input(laceholder="Placeholder" id="first_name" type="text" class="validate")
+      label(for="first_name") First Name
+  a( href="#" ).btn.waves-effect.waves-teal button

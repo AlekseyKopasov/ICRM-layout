@@ -5,7 +5,7 @@
     "stylelint-declaration-block-no-ignored-properties",
     "stylelint-media-use-custom-media",
   ],
-  "ignoreFiles": [""],
+  "ignoreFiles": "./source/js/lib/**/*.js",
   "defaultSeverity": "error",
   "rules": {
     "aditayvm/at-rule-no-children": true,

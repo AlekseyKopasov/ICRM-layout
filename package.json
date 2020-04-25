@@ -10,10 +10,10 @@
   "license": "ISC",
   "scripts": {
     "editorconfig": "editorconfig-cli",
-    "lint:css": "stylelint \"source/sass/blocks/**/*.scss\" --config ./.stylelintrc-format",
+    "lint:css": "stylelint \"source/sass/blocks/**/*.scss\"",
     "format:css": "prettier --write \"source/sass/blocks/**/*.scss\" && stylelint \"source/sass/blocks/**/*.scss\" --fix --config ./.stylelintrc-format",
     "eslint": "npx eslint .",
-    "test": "npm run editorconfig && npm run lint:css && npm run format:css && npx eslint .",
+    "test": "npm run editorconfig && npm run lint:css && npx eslint .",
     "build": "cross-env NODE_ENV=production gulp build",
     "start": "gulp start"
   },
@@ -73,9 +73,8 @@
   },
   "lint-staged": {
     "linters": {
-      "*.css": [
+      "*.scss": [
         "prettier --write",
-        "stylelint --fix --config ./.stylelintrc-format",
         "git add"
       ]
     }

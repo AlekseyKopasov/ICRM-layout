@@ -1,7 +1,2 @@
-@import "normalize",
-  "general/fonts",
-  "general/variables",
-  "general/functions",
-  "general/mixins",
-  "general/global",
-  "blocks/button"
+@import 'normalize', 'vendor/materialize.min', 'general/fonts', 'general/variables',
+  'general/functions', 'general/mixins', 'general/global', 'blocks/button';
