@@ -1,0 +1,19 @@
+mixin head(title, side)
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+
+    title!= title
+
+    //- FONTS
+    link(rel="preload" href="fonts/PTSans-regular.woff2" as="font" crossorigin="anonymous")
+    link(rel="preload" href="fonts/Tenor_Sans_regular.woff2" as="font" crossorigin="anonymous")
+
+    //- ICON
+    link(rel="shortcut icon" href="favicon.ico")
+
+    //- VIDEO
+      link(rel="preload" href="video/light.webm" as="video" crossorigin="anonymous")
+
+    //- STYLES
+    link(rel="stylesheet" href="css/style.css")

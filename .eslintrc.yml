@@ -1,0 +1,18 @@
+root: true
+
+parserOptions:
+  ecmaVersion: 6
+  sourceType: "module"
+
+env:
+  browser: true
+  es6: true
+
+globals:
+  "require": true
+  "module": true
+  "process": true
+  "__dirname": true
+
+extends:
+  "htmlacademy/es6"

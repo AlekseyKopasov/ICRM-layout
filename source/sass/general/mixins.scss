@@ -1,0 +1,130 @@
+@mixin desktop-m {
+  @media (max-width: $width-desktop-m - 1) {
+    @content;
+  }
+}
+
+@mixin desktop-s {
+  @media (max-width: $width-desktop - 1) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: $width-laptop - 1px) {
+    @content;
+  }
+}
+
+@mixin desktop-only {
+  @media (min-width: $width-laptop) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: $width-laptop - 1px) {
+    @content;
+  }
+}
+
+@mixin tablet-lg {
+  @media (max-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @media (max-width: $width-laptop - 1px) and (min-width: $width-tablet) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: $width-tablet - 1px) {
+    @content;
+  }
+}
+
+@mixin mobile-m {
+  @media (max-width: $width-min) {
+    @content;
+  }
+}
+
+@mixin mobile-s {
+  @media (max-width: $width-mobile-l - 1px) {
+    @content;
+  }
+}
+
+@mixin retina {
+  @media (min-resolution: $retina-dpi), (min-resolution: $retina-dppx) {
+    @content;
+  }
+}
+
+@mixin list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin button-reset {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+@mixin text-main {
+  font-size: size($font-base);
+  line-height: $font-base-line-height;
+}
+
+// @mixin title-text {
+//   font-size: 80px;
+//   line-height: 1.2;
+
+//   @include desktop-s {
+//     font-size: 60px;
+//   }
+
+//   @include mobile {
+//     font-size: 32px;
+//     line-height: 1.25;
+//   }
+// }
+
+// @mixin middle-text {
+//   font-family: $alt-font;
+//   font-size: 32px;
+//   line-height: 1.5;
+
+//   @include desktop-s {
+//     font-size: 26px;
+//   }
+
+//   @include mobile {
+//     font-size: 20px;
+//     line-height: 28px;
+//   }
+// }
+
+// @mixin small-text {
+//   font-family: $alt-font;
+//   font-size: 24px;
+//   line-height: 40px;
+
+//   @include desktop-s {
+//     font-size: 20px;
+//     line-height: 32px;
+//   }
+
+//   @include mobile {
+//     font-size: 16px;
+//     line-height: 24px;
+//   }
+// }
