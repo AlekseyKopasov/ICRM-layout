@@ -84,6 +84,18 @@
   line-height: $font-base-line-height;
 }
 
+@mixin basic-effect {
+  transition: opacity $transition-props;
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &:focus {
+    opacity: 0.7;
+  }
+}
+
 // @mixin title-text {
 //   font-size: 80px;
 //   line-height: 1.2;

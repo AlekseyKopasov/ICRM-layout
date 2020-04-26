@@ -1,4 +1,4 @@
 build/
-source/js/lib/**/*.js
+source/js/lib/
 webpack.config.js
 gulpfile.babel.js

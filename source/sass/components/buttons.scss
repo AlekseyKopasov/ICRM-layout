@@ -1,0 +1,13 @@
+.btn-blue {
+  line-height: 1.2;
+  background-color: $color-green;
+
+  &:hover {
+    opacity: 0.8;
+    background-color: $color-green;
+  }
+
+  &:focus {
+    background-color: darken($color-green, 15);
+  }
+}

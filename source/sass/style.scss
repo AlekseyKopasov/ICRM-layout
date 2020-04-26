@@ -1,2 +1,18 @@
-@import 'normalize', 'vendor/materialize.min', 'general/fonts', 'general/variables',
-  'general/functions', 'general/mixins', 'general/global', 'blocks/button';
+// import vendor styles
+@import 'normalize';
+@import 'vendor/materialize.min';
+// import global styles
+@import 'general/fonts';
+@import 'general/variables';
+@import 'general/functions';
+@import 'general/mixins';
+@import 'general/global';
+// import global layout styles
+@import 'layouts/empty-layout';
+// import components styles
+@import 'components/title';
+@import 'components/buttons';
+@import 'components/forms';
+// import blocks styles
+@import 'blocks/ui-kit';
+@import 'blocks/register';

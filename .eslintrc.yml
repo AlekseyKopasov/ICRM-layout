@@ -1,18 +1,15 @@
-root: true
-
-parserOptions:
-  ecmaVersion: 6
-  sourceType: "module"
-
+extends: htmlacademy/es6
 env:
-  browser: true
-  es6: true
-
+  es6: true,
+  jquery: true
+  browser: true,
 globals:
-  "require": true
-  "module": true
-  "process": true
-  "__dirname": true
-
-extends:
-  "htmlacademy/es6"
+  window: true
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+parserOptions:
+  ecmaVersion: 2018
+  sourceType: module
+rules:
+  no-console: 0
+  no-param-reassign: 0

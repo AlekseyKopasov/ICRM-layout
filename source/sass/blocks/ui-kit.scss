@@ -1,0 +1,44 @@
+.ui-kit {
+  width: 100%;
+  padding: 30px;
+  background-color: $color-white;
+
+  .titles {
+    max-width: 50%;
+    margin: 0 auto;
+  }
+
+  .title-ui {
+    margin-bottom: 15px;
+    margin-left: -120px;
+    text-decoration: underline $color-blue;
+  }
+
+  ul {
+    margin-bottom: 45px;
+  }
+
+  form {
+    max-width: 50%;
+    margin: 0 auto;
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 50%;
+    margin: 0 auto;
+  }
+
+  .buttons .title-ui {
+    width: 100%;
+  }
+
+  .buttons li {
+    margin-right: 25px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

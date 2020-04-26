@@ -29,8 +29,8 @@ body {
 
   font-family: $main-font;
   font-weight: 400;
-  color: $color-text-black;
-  background-color: $color-bg-base;
+  color: $color-black;
+  background-color: $color-white;
   scroll-behavior: smooth;
 
   @include text-main;
