@@ -1,3 +1,3 @@
-import test from './modules/test';
+import materializeAutoInit from './modules/materialize-auto-init';
 
-test();
+materializeAutoInit();

@@ -1,0 +1,78 @@
+input,
+input[type=email]:not(.browser-default),
+input[type=password]:not(.browser-default) {
+  height: auto;
+  margin: 0;
+  padding: 10px 0;
+  padding-top: 20px;
+  font-size: 14px;
+  line-height: 1.2;
+
+  transition: opacity $transition-props;
+
+  &:hover {
+    opacity: 0.5;
+
+    & + .material-icons {
+      transition: opacity $transition-props;
+      opacity: 0.5;
+    }
+  }
+
+  &:focus {
+    opacity: 1;
+    border-bottom: 1px solid $color-blue;
+    box-shadow: 0 1px 0 0 $color-blue;
+
+    & + label,
+    & + .material-icons {
+      transition: opacity $transition-props;
+      opacity: 1;
+      color: $color-blue;
+    }
+  }
+
+}
+
+input.invalid[type=email]:not(.browser-default),
+input.invalid[type=email]:not(.browser-default):focus,
+input.invalid[type=password]:not(.browser-default)
+input.invalid[type=password]:not(.browser-default):focus {
+  & + .material-icons {
+    color: $color-red-error;
+  }
+}
+
+input.valid[type=email]:not(.browser-default),
+input.valid[type=password]:not(.browser-default){
+  & + .material-icons {
+    color: $color-green;
+  }
+}
+
+label {
+  font-size: 16px;
+}
+
+.input-field > label:not(.label-icon).active {
+  transform: translateY(0) scale(0.8);
+}
+
+.material-icons {
+  position: absolute;
+  top: 15px;
+  right: 5px;
+  color: $color-grey;
+}
+
+small {
+  display: none;
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  color: $color-red-error;
+}
+
+small.active {
+  display: block;
+}

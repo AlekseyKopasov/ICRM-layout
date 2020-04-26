@@ -1,4 +1,6 @@
-include ./head
+include ../global/head
+include ../global/header
+include ../global/footer
 
 doctype html
 block variables
@@ -10,7 +12,8 @@ block variables
 html(lang=lang)
   +head(title, bodyClassName)
   body(class=bodyClassName)
+    +header()
     block content
-
+    +footer()
     script(src="js/vendor.js")
     script(src="js/main.js")
