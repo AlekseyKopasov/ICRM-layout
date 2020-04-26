@@ -1,15 +1,20 @@
+extends ../layouts/empty-layout
+
 block variables
   -
     const lang = "ru";
     const title = "ICRM";
     const bodyClassName = "";
-
 block content
-  ul
-    li
-      a( href="register.html" ) register.html --- Регистрация
-    li
-      a( href="profile.html" ) profile.html --- Профиль
-    hr
-    li
-      a( href="components.html" ) components.html --- UI KIT
+  main.index-page
+    h2.title.title-middle ICRM
+    ul
+      li
+        a( href="register.html" ) register.html --- Регистрация
+      li
+        a( href="login.html" ) login.html --- Вход
+      li
+        a( href="profile.html" ) profile.html --- Профиль
+      hr
+      li
+        a( href="components.html" ) components.html --- UI KIT

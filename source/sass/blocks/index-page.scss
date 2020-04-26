@@ -1,0 +1,11 @@
+.index-page {
+  padding: 30px;
+}
+
+a {
+  transition: color $transition-props;
+}
+
+a:hover {
+  color: $color-blue;
+}
