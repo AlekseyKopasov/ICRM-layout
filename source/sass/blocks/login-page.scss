@@ -1,3 +1,5 @@
+// Login
+
 .login-page {
   position: relative;
 }
@@ -62,4 +64,40 @@
 
 a {
   @include basic-effect();
+}
+
+// Register
+.login-page--register .btn-green {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.login-page--register .form-group__has-account {
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  margin-top: 10px;
+
+  p {
+    margin: 0;
+    margin-right: 25px;
+    padding: 0;
+    white-space: nowrap;
+    font-size: 20px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 10px 25px;
+    line-height: 1.2;
+  }
+}
+
+// Pass recovery
+.login-page--pass-recovery {
+  .btn-green {
+    padding: 15px 20px;
+    margin-top: 25px;
+  }
 }

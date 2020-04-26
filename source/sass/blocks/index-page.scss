@@ -2,10 +2,19 @@
   padding: 30px;
 }
 
-a {
+.index-page ul:not(.browser-default) > li {
+  margin-left: 20px;
+  list-style: persian;
+}
+
+.index-page a {
+  color: $color-black;
+  display: block;
+  margin-bottom: 15px;
+  padding-left: 10px;
   transition: color $transition-props;
 }
 
-a:hover {
+.index-page a:hover {
   color: $color-blue;
 }

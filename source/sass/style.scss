@@ -9,6 +9,7 @@
 @import 'general/global';
 // import global layout styles
 @import 'layouts/empty-layout';
+@import 'layouts/main-layout';
 // import components styles
 @import 'components/title';
 @import 'components/buttons';
@@ -17,4 +18,4 @@
 @import 'blocks/ui-kit';
 @import 'blocks/index-page';
 @import 'blocks/login-page';
-@import 'blocks/register';
+@import 'blocks/header';
