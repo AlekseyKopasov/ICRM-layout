@@ -7,9 +7,9 @@ block variables
     const bodyClassName = "empty-layout";
 
 block content
-  main.login-page.login-page--register
+  main.login-page
     form( action="/" method="POST" )
-      h1.title.title-middle Регистрация
+      h1.title.title-middle Добро пожаловать!
       .form-group
         .input-field
           input( id="register-email" type="email" class="validate" )
@@ -21,13 +21,10 @@ block content
           i.material-icons.tiny vpn_key
           label( for="register-pass" ) Пароль
           small Введите пароль
-        .input-field
-          input( id="register-pass-repeat" type="password" class="validate" )
-          i.material-icons.tiny vpn_key
-          label( for="register-pass-repeat" ) Повторите пароль
-          small Введите пароль
+      .form-group.form-group__login
+        button.btn.btn-green.waves-effect.waves-light( type="submit" name="action" ) Войти
+        a( href="#" ) Забыли пароль?
 
-        button.btn.btn-green.waves-effect.waves-light( type="submit" name="action" ) Зарегистрироваться
       .form-group.form-group__has-account
-        p Уже есть аккаут?
-        button.btn.waves-effect.waves-light( type="button" name="action" ) Войти
+        p Еще нет аккаута?
+        button.btn.waves-effect.waves-light( type="button" name="action" ) Зарегистрироваться

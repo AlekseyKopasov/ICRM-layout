@@ -26,14 +26,14 @@ import webpackConfig from './webpack.config';
 
 const server = browserSync.create();
 
-gulp.task(`pug`, () => gulp.src(`source/pug/pages/*.pug`)
+gulp.task('pug', () => gulp.src('source/pug/pages/*.pug')
   .pipe(plumber())
   .pipe(pug({
     pretty: true,
   }))
-  .pipe(gulp.dest(`build`)));
+  .pipe(gulp.dest('build')));
 
-gulp.task(`css`, () => gulp.src(`source/sass/style.scss`)
+gulp.task('css', () => gulp.src('source/sass/style.scss')
   .pipe(plumber())
   .pipe(sourcemaps.init())
   .pipe(sass({
@@ -44,58 +44,59 @@ gulp.task(`css`, () => gulp.src(`source/sass/style.scss`)
     smoothscroll(),
   ]))
   .pipe(csso())
-  .pipe(sourcemaps.write(``))
-  .pipe(gulp.dest(`build/css`))
+  .pipe(sourcemaps.write(''))
+  .pipe(gulp.dest('build/css'))
   .pipe(server.stream()));
 
-gulp.task(`clean`, () => del(`build`));
+gulp.task('clean', () => del('build'));
 
-gulp.task(`copy`, () => gulp.src([
-  `source/fonts/**/*.{woff,woff2}`,
-  `source/img/**/*`,
-  `source/video/**/*`,
-  `source/json/**/*`,
-  `!source/img/sprite/*`,
-  `!source/img/sprite`,
-  `source/favicon.ico`
+gulp.task('copy', () => gulp.src([
+  'source/fonts/**/*.{woff,woff2}',
+  'source/img/**/*',
+  'source/video/**/*',
+  'source/json/**/*',
+  '!source/img/sprite/*',
+  '!source/img/sprite',
+  'source/favicon.ico'
 ], {
-  base: `source`,
+  base: 'source',
 })
-  .pipe(gulp.dest(`build`)));
+  .pipe(gulp.dest('build')));
 
-gulp.task(`sprite`, () => gulp.src(`source/img/sprite/*.svg`)
+gulp.task('sprite', () => gulp.src('source/img/sprite/*.svg')
   .pipe(svgstore({
     inlineSvg: true,
   }))
-  .pipe(rename(`sprite.svg`))
-  .pipe(gulp.dest(`build/img`)));
+  .pipe(rename('sprite.svg'))
+  .pipe(gulp.dest('build/img')));
 
-gulp.task(`js`, () => gulp.src(`source/js/index.js`)
+gulp.task('js', () => gulp.src('source/js/index.js')
   .pipe(webpack(webpackConfig))
-  .pipe(gulp.dest(`build/js`)));
+  .pipe(gulp.dest('build/js')));
 
-gulp.task(`server`, () => {
+gulp.task('server', () => {
   server.init({
-    server: `build/`,
+    server: 'build/',
     notify: false,
     open: true,
     cors: true,
-    ui: false
+    ui: false,
+    browser: ['firefox']
   });
 
-  gulp.watch(`source/sass/**/*.{scss,sass}`, gulp.series(`css`, `refresh`));
-  gulp.watch(`source/**/*.pug`, gulp.series(`pug`, `refresh`));
-  gulp.watch(`source/img/**/*`, gulp.series(`copy`, `sprite`, `pug`, `refresh`));
-  gulp.watch(`source/js/**/*`, gulp.series(`js`, `refresh`));
+  gulp.watch('source/sass/**/*.{scss,sass}', gulp.series('css', 'refresh'));
+  gulp.watch('source/**/*.pug', gulp.series('pug', 'refresh'));
+  gulp.watch('source/img/**/*', gulp.series('copy', 'sprite', 'pug', 'refresh'));
+  gulp.watch('source/js/**/*', gulp.series('js', 'refresh'));
 });
 
-gulp.task(`refresh`, (done) => {
+gulp.task('refresh', (done) => {
   server.reload();
   done();
 });
 
 // Таски для отпимизации изображений
-gulp.task(`images`, () => gulp.src(`build/img/**/*.{png,jpg,svg,webp}`)
+gulp.task('images', () => gulp.src('build/img/**/*.{png,jpg,svg,webp}')
   .pipe(imagemin([
     imageminPngquant({quality: [0.6, 0.8]}),
     imagemin.jpegtran({progressive: true}),
@@ -105,9 +106,9 @@ gulp.task(`images`, () => gulp.src(`build/img/**/*.{png,jpg,svg,webp}`)
       ],
     }),
   ]))
-  .pipe(gulp.dest(`build/img`)));
+  .pipe(gulp.dest('build/img')));
 
-gulp.task(`svg`, () => gulp.src(`source/img/sprite/*.svg`)
+gulp.task('svg', () => gulp.src('source/img/sprite/*.svg')
   .pipe(imagemin([
     imagemin.svgo({
       plugins: [
@@ -115,44 +116,44 @@ gulp.task(`svg`, () => gulp.src(`source/img/sprite/*.svg`)
       ],
     }),
   ]))
-  .pipe(gulp.dest(`source/img/sprite`)));
+  .pipe(gulp.dest('source/img/sprite')));
 
 // Конвертация изображений в формат .webp
-gulp.task(`webp`, () => gulp.src(`build/img/**/*.{png,jpg}`)
+gulp.task('webp', () => gulp.src('build/img/**/*.{png,jpg}')
   .pipe(webp({quality: 90}))
-  .pipe(gulp.dest(`build/img`)));
+  .pipe(gulp.dest('build/img')));
 
-gulp.task(`build`, gulp.series(
-    `clean`,
+gulp.task('build', gulp.series(
+    'clean',
     gulp.parallel(
-        `copy`,
-        `css`,
+        'copy',
+        'css',
     ),
     gulp.parallel(
-        `sprite`,
-        `images`,
-        `webp`,
+        'sprite',
+        'images',
+        'webp',
     ),
     gulp.parallel(
-        `js`,
-        `pug`,
+        'js',
+        'pug',
     ),
 ));
 
-gulp.task(`start`, gulp.series(
-    `clean`,
+gulp.task('start', gulp.series(
+    'clean',
     gulp.parallel(
-        `copy`,
-        `css`,
+        'copy',
+        'css',
     ),
     gulp.parallel(
-        `sprite`,
-        `images`,
-        `webp`,
+        'sprite',
+        'images',
+        'webp',
     ),
     gulp.parallel(
-        `pug`,
-        `js`,
+        'pug',
+        'js',
     ),
-    `server`,
+    'server',
 ));
