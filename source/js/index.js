@@ -1,3 +1,3 @@
-import materializeAutoInit from './modules/materialize-auto-init';
+import sidebar from './modules/sidebar';
 
-materializeAutoInit();
+sidebar();

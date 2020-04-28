@@ -81,7 +81,6 @@ gulp.task('server', () => {
     open: true,
     cors: true,
     ui: false,
-    browser: ['firefox']
   });
 
   gulp.watch('source/sass/**/*.{scss,sass}', gulp.series('css', 'refresh'));

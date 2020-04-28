@@ -85,17 +85,19 @@
 }
 
 @mixin basic-effect {
-  color: $color-grey;
+  color: $color-gray;
   transition: opacity $transition-props;
 
   &:hover,
   &:focus {
-    color: $color-blue-accent;
+    color: $color-indigo;
     opacity: 0.7;
+    background-color: var(--light);
   }
 
   &:active {
     opacity: 1;
+    ackground-color: rgba($color-gray-dark-hex, 0.3);
   }
 }
 

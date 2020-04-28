@@ -39,7 +39,7 @@ input.invalid[type=email]:not(.browser-default):focus,
 input.invalid[type=password]:not(.browser-default)
 input.invalid[type=password]:not(.browser-default):focus {
   & + .material-icons {
-    color: $color-red-error;
+    color: $color-danger;
   }
 }
 
@@ -62,7 +62,7 @@ label {
   position: absolute;
   top: 15px;
   right: 5px;
-  color: $color-grey;
+  color: $color-gray;
 }
 
 small {
@@ -70,7 +70,7 @@ small {
   position: absolute;
   bottom: -25px;
   left: 0;
-  color: $color-red-error;
+  color: $color-danger;
 }
 
 small.active {
