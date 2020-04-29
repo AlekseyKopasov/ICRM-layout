@@ -13,3 +13,17 @@ parserOptions:
 rules:
   no-console: 0
   no-param-reassign: 0
+  quotes: [2, "single", { "avoidEscape": true }]
+
+# root: true
+
+# parserOptions:
+#   ecmaVersion: 6
+#   sourceType: "module"
+
+# env:
+#   browser: true
+#   es6: true
+
+# extends:
+#   "htmlacademy/es6"

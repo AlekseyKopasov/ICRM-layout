@@ -1,4 +1,5 @@
 build/
+vendor/
 source/js/lib/
 webpack.config.js
 gulpfile.babel.js

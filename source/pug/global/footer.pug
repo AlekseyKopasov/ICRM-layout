@@ -1,4 +1,8 @@
 include ../mixins/svg
 
 mixin footer()
-  footer.footer Footer
+  footer.footer.page-footer
+    .footer-copyright
+      .container
+        | &copy; 2014 Copyright Text
+        a.grey-text.text-lighten-4.right( href="#" ) More Links

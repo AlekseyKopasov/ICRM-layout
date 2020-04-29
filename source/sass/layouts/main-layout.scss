@@ -11,4 +11,15 @@
       display: flex!important;
     }
   }
+
+  @media only screen and (min-width: 601px) {
+    .nav-wrapper i{
+      height: 0;
+      line-height: 0;
+    }
+  }
+
+  nav ul a:hover, nav ul li.active {
+    background-color: transparent;
+  }
 }

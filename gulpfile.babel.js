@@ -22,7 +22,6 @@ import webp from 'gulp-webp';
 import plumber from 'gulp-plumber';
 import browserSync from 'browser-sync';
 import webpackConfig from './webpack.config';
-// import uglify from 'gulp-uglify';
 
 const server = browserSync.create();
 
@@ -81,7 +80,6 @@ gulp.task('server', () => {
     open: true,
     cors: true,
     ui: false,
-    browser: ['firefox']
   });
 
   gulp.watch('source/sass/**/*.{scss,sass}', gulp.series('css', 'refresh'));

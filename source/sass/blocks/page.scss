@@ -1,0 +1,21 @@
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  min-height: 100vh;
+  min-width: $width-min;
+
+  background-color: $color-theme-bg-light;
+  overflow-x: hidden;
+}
+
+.page__content {
+  position: relative;
+  flex: 1 0 auto;
+}
+
+.page__footer {
+  flex-shrink: 0;
+}

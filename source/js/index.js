@@ -1,3 +1,7 @@
-import materializeAutoInit from './modules/materialize-auto-init';
+import sidebar from './modules/sidebar';
+import customScroll from './modules/custom-scroll';
+import noteTitle from './modules/note-link-title';
 
-materializeAutoInit();
+sidebar();
+customScroll();
+noteTitle();

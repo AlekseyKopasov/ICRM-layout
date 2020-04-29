@@ -1,8 +1,8 @@
 import debounce from './debounce';
 
 const state = {
-  headerElem: ``,
-  cssCustomPropsName: ``,
+  headerElem: '',
+  cssCustomPropsName: '',
   headerSize: null,
 };
 
@@ -25,7 +25,7 @@ const setSize = () => {
 const debouncedSetSize = debounce(setSize, 500);
 
 const addHandler = () => {
-  window.addEventListener(`resize`, debouncedSetSize);
+  window.addEventListener('resize', debouncedSetSize);
 };
 
 const getHeaderHeightSize = (headerSelector, cssCustomPropsName) => {
