@@ -10,19 +10,31 @@ mixin header()
     .header__notification
       a.dropdown-trigger( href="#" data-target="dropdown-header" )
         +svg("notifications", 24, 24)
-      ul.header__notification-list.dropdown-content( id="dropdown-header" )
+      ul.header__notification-list.dropdown-content( id="dropdown-header" data-simplebar )
         li.header__notification-item
-          a.header__notification-link( href="#" title="") Напоминание такое-то о том-то и том-то
-        li.header__notification-item
-          a.header__notification-link( href="#" title="" ) Еще одно большое напоиминапие: позвонить, написать
-        li.header__notification-item
-          a.header__notification-link( href="#" title="" ) Еще одно большое напоиминапие: позвонить, написать
+          a.header__notification-link( href="#" title="" ) Напоминание такое-то о том-то и том-то
+            span
+              +svg("info", 24, 24)
         li.header__notification-item
           a.header__notification-link( href="#" title="" ) Еще одно большое напоиминапие: позвонить, написать
+            span
+              +svg("info", 24, 24)
         li.header__notification-item
           a.header__notification-link( href="#" title="" ) Еще одно большое напоиминапие: позвонить, написать
+            span
+              +svg("info", 24, 24)
         li.header__notification-item
           a.header__notification-link( href="#" title="" ) Еще одно большое напоиминапие: позвонить, написать
+            span
+              +svg("info", 24, 24)
+        li.header__notification-item
+          a.header__notification-link( href="#" title="" ) Еще одно большое напоиминапие: позвонить, написать
+            span
+              +svg("info", 24, 24)
+        li.header__notification-item
+          a.header__notification-link( href="#" title="" ) Еще одно большое напоиминапие: позвонить, написать
+            span
+              +svg("info", 24, 24)
 
     .header__nav
       a.dropdown-trigger( href="#" data-target="dropdown-header" )
