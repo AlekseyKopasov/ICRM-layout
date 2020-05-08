@@ -1,0 +1,48 @@
+extends ../layout/empty-layout
+
+block variables
+  -
+    const lang = "ru";
+    const title = "ICRM";
+    const bodyClassName = "empty-layout";
+
+block content
+  main.ui-kit
+    ul
+      h1.title.title-large UI KIT
+      li
+        .titles
+          h2.title.title-middle.title-ui Заголовки
+          ul
+            li
+              h1.title.title-large Title large 50px
+            li
+              h2.title.title-middle Title middle 34px
+            li
+              h3.title.title-small Title small 24px
+        li
+           form
+            h2.title.title-middle.title-ui Поля формы
+            .form-group
+              .input-field
+                input( id="email" type="email" class="validate" )
+                i.material-icons.tiny email
+                label( for="email" ) Email
+                small Введите email
+              .input-field
+                input( id="pass" type="password" class="validate" )
+                i.material-icons.tiny vpn_key
+                label( for="pass" ) Пароль
+                small Введите пароль
+              .input-field
+                input( id="pass-repeat" type="password" class="validate" )
+                i.material-icons.tiny vpn_key
+                label( for="pass-repeat" ) Повторите пароль
+                small Введите пароль
+        li
+          ul.buttons
+            h2.title.title-middle.title-ui Кнопки
+            li
+              button.btn.btn-blue.waves-effect.waves-light Отправить
+            li
+              button.btn.waves-effect.waves-light Подтвердить

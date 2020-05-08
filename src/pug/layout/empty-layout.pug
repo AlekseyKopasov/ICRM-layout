@@ -1,0 +1,12 @@
+doctype html
+block variables
+  -
+    const lang = ""
+    const title = ""
+    const bodyClassName = ""
+
+html(lang=lang)
+  include ../includes/modules/head
+
+  body(class=bodyClassName)
+    block content

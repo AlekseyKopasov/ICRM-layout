@@ -1,0 +1,19 @@
+include ../utils/mixins
+
+doctype html
+block variables
+  -
+    const lang = ""
+    const title = ""
+    const bodyClassName = ""
+
+html(lang=lang)
+  include ../includes/modules/head
+
+  body(class=bodyClassName)
+    .page
+      include ../includes/modules/header
+      .page__content
+        block content
+      .page__footer
+        include ../includes/modules/footer

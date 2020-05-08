@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><symbol id="info" viewBox="0 0 24 24">
+  <path fill="none" d="M0 0h24v24H0z"/>
+  <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+</symbol><symbol id="notifications" viewBox="0 0 24 24">
+  <path d="M12 22a2 2 0 002-2h-4a2 2 0 002 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4a1.5 1.5 0 10-3 0v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+</symbol><symbol id="person" viewBox="0 0 24 24"><path d="M12 2a9 9 0 00-2.31 17.69L12 22l2.31-2.31A9 9 0 0012 2zm0 2a3 3 0 110 6 3 3 0 010-6zm0 14.3a7.2 7.2 0 01-6-3.22c.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08a7.2 7.2 0 01-6 3.22z"/><path fill="none" d="M0 0h24v24H0z"/></symbol></svg>
