@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <link rel="preload" href="/assets/fonts/PTSans-regular.woff2" as="font" crossorigin="anonymous">
+  <link rel="preload" href="/assets/fonts/Tenor_Sans_regular.woff2" as="font" crossorigin="anonymous">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+  <body class="empty-layout">
+    <main class="login-page">
+      <form action="/" method="POST">
+        <h1 class="title title-middle">Добро пожаловать!</h1>
+        <div class="form-group">
+          <div class="input-field">
+            <input class="validate" id="register-email" type="email"><i class="material-icons tiny">email</i>
+            <label for="register-email">Email</label><small>Введите email</small>
+          </div>
+          <div class="input-field">
+            <input class="validate" id="register-pass" type="password"><i class="material-icons tiny">vpn_key</i>
+            <label for="register-pass">Пароль</label><small>Введите пароль</small>
+          </div>
+        </div>
+        <div class="form-group form-group__login">
+          <button class="btn btn-green waves-effect waves-light" type="submit" name="action">Войти</button><a href="#">Забыли пароль?</a>
+        </div>
+        <div class="form-group form-group__has-account">
+          <p>Еще нет аккаута?</p>
+          <button class="btn waves-effect waves-light" type="button" name="action">Зарегистрироваться</button>
+        </div>
+      </form>
+    </main>
+  <script type="text/javascript" src="/js/vendors.js"></script><script type="text/javascript" src="/js/libs.js"></script><script type="text/javascript" src="/js/app.js"></script></body>
+</html>
