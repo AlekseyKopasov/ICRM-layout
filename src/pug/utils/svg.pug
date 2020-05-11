@@ -5,3 +5,7 @@ mixin svg( name, width, height , className)
 mixin svg-no-sizes(name, className)
   svg( aria-hidden="true" class=(className ? className : null))
     use( xlink:href=("/img/sprite.svg#" + name) )
+
+mixin svg-includes(name)
+  svg(viewBox= name.viewBox)
+    use( xlink:href= "#" + name.id)
