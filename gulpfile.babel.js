@@ -2,10 +2,10 @@
 // import svgstore from 'gulp-svgstore';
 // import rename from 'gulp-rename';
 //
-// // SVG-svg-sprite
-// gulp.task('svg-sprite', () => gulp.src('src/assets/img/svg-sprite/*.svg')
+// // SVG-sprite-icons
+// gulp.task('sprite-icons', () => gulp.src('src/assets/img/sprite-icons/*.svg')
 // .pipe(svgstore({
 // 	inlineSvg: true,
 // }))
-// .pipe(rename('svg-sprite.svg'))
+// .pipe(rename('sprite-icons.svg'))
 // .pipe(gulp.dest('src/assets/img')));

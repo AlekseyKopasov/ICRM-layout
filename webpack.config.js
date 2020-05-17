@@ -13,7 +13,7 @@ const isProd = !isDev;
 const PATHS = {
 	src: path.join(__dirname, '/src'),
 	dist: path.join(__dirname, '/public/'),
-	assets: 'assets/'
+	assets: '/assets/'
 };
 
 const PAGES_DIR = `${PATHS.src}/pug/pages`;
@@ -39,21 +39,21 @@ const optimization = () => {
 		config.minimizer = [
 			// new OptimizeCssAssetWebpackPlugin(),
 			// new TerserWebpackPlugin()
-			new UglifyJsPlugin({
-				sourceMap: true,
-				uglifyOptions: {
-					warnings: false,
-					parse: {},
-					compress: {},
-					mangle: false,
-					output: {
-						comments: false,
-					},
-					toplevel: true,
-					nameCache: null,
-					keep_names: false,
-				},
-			})
+			// new UglifyJsPlugin({
+			// 	sourceMap: true,
+			// 	uglifyOptions: {
+			// 		warnings: false,
+			// 		parse: {},
+			// 		compress: {},
+			// 		mangle: false,
+			// 		output: {
+			// 			comments: false,
+			// 		},
+			// 		toplevel: true,
+			// 		nameCache: null,
+			// 		keep_names: false,
+			// 	},
+			// })
 		]
 	}
 
@@ -62,26 +62,26 @@ const optimization = () => {
 
 const plugins = () => {
 	const base = [
-		new MiniCssExtractPlugin({
-			filename: `${PATHS.assets}css/[name].css`
-		}),
-		new CopyWebpackPlugin( [
-			{ from: `${PATHS.src}/${PATHS.assets}img`, to: `${PATHS.assets}img`, ignore: [`${PATHS.assets}img/svg-sprite/`], },
-			{ from: `${PATHS.src}/${PATHS.assets}fonts`, to: `${PATHS.assets}fonts` },
-			{ from: `${PATHS.src}/static`, to: '' }
-			],
-		),
+		// new MiniCssExtractPlugin({
+		// 	filename: `${PATHS.assets}css/[name].css`
+		// }),
+		// new CopyWebpackPlugin( [
+		// 	// { from: `${PATHS.src}/${PATHS.assets}img`, to: `${PATHS.assets}img` },
+		// 	{ from: `${PATHS.src}/${PATHS.assets}fonts`, to: `${PATHS.assets}fonts` },
+		// 	{ from: `${PATHS.src}/static`, to: '' }
+		// 	],
+		// ),
 		new SpriteLoaderPlugin({
-			plainSprite: true
+			// plainSprite: true
 		}),
 
-		...PAGES.map(
-			page =>
-				new HtmlWebpackPlugin({
-					template: `${PAGES_DIR}/${page}`,
-					filename: `./${page.replace(/\.pug/,'.html')}`
-				})
-		)
+		// ...PAGES.map(
+		// 	page =>
+		// 		new HtmlWebpackPlugin({
+		// 			template: `${PAGES_DIR}/${page}`,
+		// 			filename: `./${page.replace(/\.pug/,'.html')}`
+		// 		})
+		// )
 	]
 
 	if (isDev) {
@@ -120,9 +120,10 @@ const cssLoaders = extra => {
 module.exports = {
 	mode: process.env.NODE_ENV || 'production',
 	devtool: isDev ? 'source-map' : '',
+	// target: isDev ? 'node' : '',
 
 	entry: {
-		libs: `${PATHS.src}/js/vendor.js`,
+		// libs: `${PATHS.src}/js/vendor.js`,
 		app: PATHS.src
 		// module: `${PATHS.src}/your-module.js`,
 	},
@@ -147,55 +148,70 @@ module.exports = {
 		rules: [
 			// SVG sprite
 			{
-				test: /svg-sprite\/.*\.svg$/,
+				test: /\.svg$/,
+				use: [
+					{
+						loader: 'svg-sprite-loader',
+						options: {
+							extract: true,
+							publicPath: `${PATHS.dist}sprite/`
+						}
+					},
+					'svgo-loader'
+				]
+			},
+			{
+				test: /sprite-icons\/.*\.svg$/,
+				include: `${PATHS.assets}sprite-icons/`,
 				loader: 'svg-sprite-loader',
 				options: {
 					extract: true,
-					spriteFilename: `${PATHS.src}img/sprite.svg`, // this is the destination of your sprite sheet
+					spriteFilename: `${PATHS.assets}img/sprite.svg`, // this is the destination of your sprite sheet
 					runtimeCompat: true
 				}
 			},
-			{
-				// Pug
-				test: /\.pug$/,
-				loader: 'pug-loader',
-				options: {
-					pretty: true
-				}
-			},
+			// {
+			// 	// Pug
+			// 	test: /\.pug$/,
+			// 	loader: 'pug-loader',
+			// 	options: {
+			// 		pretty: true
+			// 	}
+			// },
 			{
 				// JavaScript
 				test: /\.js$/,
 				loader: 'babel-loader',
 				exclude: '/node_modules/'
 			},
-			{
-				// Fonts
-				test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-				loader: 'file-loader',
-				options: {
-					name: '[name].[ext]'
-				}
-			},
-			{
-				// images / icons
-				test: /\.(png|jpg|jpeg|gif|ico|svg|webp)$/,
-				loader: 'file-loader',
-				exclude: [`/${PATHS.src}/assets/svg-sprite/`],
-				options: {
-					name: '[name].[ext]'
-				}
-			},
-			{
-				// scss
-				test: /\.s[ac]ss$/,
-				use: cssLoaders('sass-loader')
-			},
-			{
-				// css
-				test: /\.css$/,
-				use: cssLoaders()
-			}
+			// {
+			// 	// Fonts
+			// 	test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+			// 	loader: 'file-loader',
+			// 	options: {
+			// 		name: '[name].[ext]'
+			// 	}
+			// },
+			// {
+			// 	// images / icons
+			// 	// loader: 'url-loader',
+			// 	test: /\.(png|jpe?g|gif|ico|svg|webp)$/,
+			// 	loader: 'url-loader',
+			// 	include: `${PATHS.assets}img/`,
+			// 	options: {
+			// 		name: '[name].[ext]'
+			// 	}
+			// },
+			// {
+			// 	// scss
+			// 	test: /\.s[ac]ss$/,
+			// 	use: cssLoaders('sass-loader')
+			// },
+			// {
+			// 	// css
+			// 	test: /\.css$/,
+			// 	use: cssLoaders()
+			// }
 		]
 	},
 
