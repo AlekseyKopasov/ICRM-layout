@@ -6,6 +6,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
+const OptimizeCssAssetWebpackPlugin = require('optimize-css-assets-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
@@ -37,58 +39,112 @@ const optimization = () => {
 
 	if (isProd) {
 		config.minimizer = [
-			// new OptimizeCssAssetWebpackPlugin(),
-			// new TerserWebpackPlugin()
-			// new UglifyJsPlugin({
-			// 	sourceMap: true,
-			// 	uglifyOptions: {
-			// 		warnings: false,
-			// 		parse: {},
-			// 		compress: {},
-			// 		mangle: false,
-			// 		output: {
-			// 			comments: false,
-			// 		},
-			// 		toplevel: true,
-			// 		nameCache: null,
-			// 		keep_names: false,
-			// 	},
-			// })
+			new OptimizeCssAssetWebpackPlugin(),
+			new UglifyJsPlugin({
+				sourceMap: true,
+				uglifyOptions: {
+					warnings: false,
+					parse: {},
+					compress: {},
+					mangle: false,
+					output: {
+						comments: false,
+					},
+					toplevel: true,
+					nameCache: null,
+					keep_names: false,
+				},
+			})
 		]
 	}
 
 	return config
 }
+/*
+* include: `${PATHS.assets}img/`,
+				exclude: [`${PATHS.assets}img/sprite`],
+				options: {
+					name: '[name].[ext]'
+				},
+*
+* */
+const optimizationImages = () => {
+	const option = [
+		'url-loader',
+		// {
+		// 	loader: 'image-webpack-loader',
+		// 	options: {
+		// 		mozjpeg: {
+		// 			progressive: true,
+		// 			quality: 80
+		// 		},
+		// 		// optipng.enabled: false will disable optipng
+		// 		optipng: {
+		// 			enabled: false,
+		// 		},
+		// 		pngquant: {
+		// 			quality: [0.65, 0.90],
+		// 			speed: 4
+		// 		},
+		// 		gifsicle: {
+		// 			interlaced: false,
+		// 		},
+		// 		// the webp option will enable WEBP
+		// 		webp: {
+		// 			quality: 75
+		// 		},
+		// 		// svg option
+		// 		svgo: {
+		// 			plugins: [
+		// 				{
+		// 					removeViewBox: false
+		// 				},
+		// 				{
+		// 					removeEmptyAttrs: false
+		// 				}
+		// 			]
+		// 		}
+		// 	}
+		// },
+	]
+
+	return option
+}
 
 const plugins = () => {
 	const base = [
-		// new MiniCssExtractPlugin({
-		// 	filename: `${PATHS.assets}css/[name].css`
-		// }),
-		// new CopyWebpackPlugin( [
-		// 	// { from: `${PATHS.src}/${PATHS.assets}img`, to: `${PATHS.assets}img` },
-		// 	{ from: `${PATHS.src}/${PATHS.assets}fonts`, to: `${PATHS.assets}fonts` },
-		// 	{ from: `${PATHS.src}/static`, to: '' }
-		// 	],
-		// ),
-		new SpriteLoaderPlugin({
-			// plainSprite: true
+		new CleanWebpackPlugin({
+			verbose : true ,
+			cleanOnceBeforeBuildPatterns: [`${PATHS.dist}`]
 		}),
+		new MiniCssExtractPlugin({
+			filename: `${PATHS.assets}css/[name].css`
+		}),
+		new CopyWebpackPlugin( [
+			{ from: `${PATHS.assets}img`,
+				to: `${PATHS.dist}img`,
+				ignore: ['**/sprite/**']
+			},
+			{ from: `${PATHS.assets}fonts`, to: `${PATHS.dist}fonts` },
+			{ from: `${PATHS.src}/static`, to: '' }
+			],
+		),
+		new SpriteLoaderPlugin(),
 
-		// ...PAGES.map(
-		// 	page =>
-		// 		new HtmlWebpackPlugin({
-		// 			template: `${PAGES_DIR}/${page}`,
-		// 			filename: `./${page.replace(/\.pug/,'.html')}`
-		// 		})
-		// )
+		...PAGES.map(
+			page =>
+				new HtmlWebpackPlugin({
+					template: `${PAGES_DIR}/${page}`,
+					filename: `./${page.replace(/\.pug/,'.html')}`
+				})
+		)
 	]
 
 	if (isDev) {
-		// base.push(
-		// 	new webpack.SourceMapDevToolPlugin({
-		// 		filename: '[file].map'
-		// 	}))
+		base.push(
+			new webpack.SourceMapDevToolPlugin({
+				filename: '[file].map[query]'
+			}))
 	}
 
 	return base
@@ -96,7 +152,6 @@ const plugins = () => {
 const cssLoaders = extra => {
 	const loaders = [
 			'style-loader',
-			// MiniCssExtractPlugin.loader,
 			{
 				loader: 'css-loader',
 				options: { sourceMap: true }
@@ -119,11 +174,9 @@ const cssLoaders = extra => {
 
 module.exports = {
 	mode: process.env.NODE_ENV || 'production',
-	devtool: isDev ? 'source-map' : '',
-	// target: isDev ? 'node' : '',
 
 	entry: {
-		// libs: `${PATHS.src}/js/vendor.js`,
+		libs: `${PATHS.src}/js/vendor.js`,
 		app: PATHS.src
 		// module: `${PATHS.src}/your-module.js`,
 	},
@@ -134,7 +187,8 @@ module.exports = {
 	},
 
 	devServer: {
-		// contentBase: PATHS.dist,
+		contentBase: PATHS.dist,
+		hot: true,
 		port: 8081,
 		overlay: {
 			warnings: true,
@@ -154,64 +208,63 @@ module.exports = {
 						loader: 'svg-sprite-loader',
 						options: {
 							extract: true,
-							publicPath: `${PATHS.dist}sprite/`
+							esModule: false,
+							// publicPath: `${PATHS.dist}img/`,
+							outputPath: 'img/'
 						}
 					},
-					'svgo-loader'
+					// 'svgo-loader'
 				]
 			},
 			{
-				test: /sprite-icons\/.*\.svg$/,
-				include: `${PATHS.assets}sprite-icons/`,
-				loader: 'svg-sprite-loader',
+				// Pug
+				test: /\.pug$/,
+				loader: 'pug-loader',
 				options: {
-					extract: true,
-					spriteFilename: `${PATHS.assets}img/sprite.svg`, // this is the destination of your sprite sheet
-					runtimeCompat: true
+					pretty: true
 				}
 			},
-			// {
-			// 	// Pug
-			// 	test: /\.pug$/,
-			// 	loader: 'pug-loader',
-			// 	options: {
-			// 		pretty: true
-			// 	}
-			// },
 			{
 				// JavaScript
 				test: /\.js$/,
 				loader: 'babel-loader',
 				exclude: '/node_modules/'
 			},
-			// {
-			// 	// Fonts
-			// 	test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-			// 	loader: 'file-loader',
-			// 	options: {
-			// 		name: '[name].[ext]'
-			// 	}
-			// },
-			// {
-			// 	// images / icons
-			// 	// loader: 'url-loader',
-			// 	test: /\.(png|jpe?g|gif|ico|svg|webp)$/,
-			// 	loader: 'url-loader',
-			// 	include: `${PATHS.assets}img/`,
-			// 	options: {
-			// 		name: '[name].[ext]'
-			// 	}
-			// },
-			// {
-			// 	// scss
-			// 	test: /\.s[ac]ss$/,
-			// 	use: cssLoaders('sass-loader')
-			// },
-			// {
-			// 	// css
-			// 	test: /\.css$/,
-			// 	use: cssLoaders()
-			// }
+			{
+				// Fonts
+				test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+				loader: 'file-loader',
+				options: {
+					name: '[name].[ext]'
+				}
+			},
+			{
+				// images / icons
+	// 			test: /\.(png|jpe?g|gif|ico|svg|webp)$/,
+	// 		{
+	// 			loader: 'url-loader',
+	// 			include: `${PATHS.assets}img/`,
+	// 			exclude: [`${PATHS.assets}img/sprite`],
+	// 			options: {
+	// 				name: '[name].[ext]'
+	// 			}
+	// 		},
+	// 		{
+	// 			use: optimizationImages()
+	// 		}
+	// },
+
+
+			{
+				// scss
+				test: /\.s[ac]ss$/,
+				use: cssLoaders('sass-loader')
+			},
+			{
+				// css
+				test: /\.css$/,
+				use: cssLoaders()
+			}
 		]
 	},
 
