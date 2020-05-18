@@ -9,7 +9,7 @@ const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 const OptimizeCssAssetWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
 
 const PATHS = {
@@ -23,7 +23,7 @@ const PAGES = fs
 	.readdirSync(PAGES_DIR)
 	.filter(fileName => fileName.endsWith('.pug'));
 
-const optimization = () => {
+const optimizationJs = () => {
 	const config = {
 		splitChunks: {
 			cacheGroups: {
@@ -60,53 +60,44 @@ const optimization = () => {
 
 	return config
 }
-/*
-* include: `${PATHS.assets}img/`,
-				exclude: [`${PATHS.assets}img/sprite`],
-				options: {
-					name: '[name].[ext]'
-				},
-*
-* */
+
 const optimizationImages = () => {
-	const option = [
-		'url-loader',
-		// {
-		// 	loader: 'image-webpack-loader',
-		// 	options: {
-		// 		mozjpeg: {
-		// 			progressive: true,
-		// 			quality: 80
-		// 		},
-		// 		// optipng.enabled: false will disable optipng
-		// 		optipng: {
-		// 			enabled: false,
-		// 		},
-		// 		pngquant: {
-		// 			quality: [0.65, 0.90],
-		// 			speed: 4
-		// 		},
-		// 		gifsicle: {
-		// 			interlaced: false,
-		// 		},
-		// 		// the webp option will enable WEBP
-		// 		webp: {
-		// 			quality: 75
-		// 		},
-		// 		// svg option
-		// 		svgo: {
-		// 			plugins: [
-		// 				{
-		// 					removeViewBox: false
-		// 				},
-		// 				{
-		// 					removeEmptyAttrs: false
-		// 				}
-		// 			]
-		// 		}
-		// 	}
-		// },
-	]
+	const option =
+		{
+			loader: 'image-webpack-loader',
+			options: {
+				mozjpeg: {
+					progressive: true,
+					quality: 80
+				},
+				// optipng.enabled: false will disable optipng
+				optipng: {
+					enabled: false,
+				},
+				pngquant: {
+					quality: [0.65, 0.90],
+					speed: 4
+				},
+				gifsicle: {
+					interlaced: false,
+				},
+				// the webp option will enable WEBP
+				webp: {
+					quality: 75
+				},
+				// svg option
+				svgo: {
+					plugins: [
+						{
+							removeViewBox: false
+						},
+						{
+							removeEmptyAttrs: false
+						}
+					]
+				}
+			}
+		}
 
 	return option
 }
@@ -114,7 +105,8 @@ const optimizationImages = () => {
 const plugins = () => {
 	const base = [
 		new CleanWebpackPlugin({
-			verbose : true ,
+			verbose: true,
+			dry: false,
 			cleanOnceBeforeBuildPatterns: [`${PATHS.dist}`]
 		}),
 		new MiniCssExtractPlugin({
@@ -149,6 +141,7 @@ const plugins = () => {
 
 	return base
 }
+
 const cssLoaders = extra => {
 	const loaders = [
 			'style-loader',
@@ -196,7 +189,7 @@ module.exports = {
 		}
 	},
 
-	optimization: optimization(),
+	optimization: optimizationJs(),
 
 	module: {
 		rules: [
@@ -240,21 +233,20 @@ module.exports = {
 			},
 			{
 				// images / icons
-	// 			test: /\.(png|jpe?g|gif|ico|svg|webp)$/,
-	// 		{
-	// 			loader: 'url-loader',
-	// 			include: `${PATHS.assets}img/`,
-	// 			exclude: [`${PATHS.assets}img/sprite`],
-	// 			options: {
-	// 				name: '[name].[ext]'
-	// 			}
-	// 		},
-	// 		{
-	// 			use: optimizationImages()
-	// 		}
-	// },
-
-
+				test: /\.(png|jpe?g|gif|svg|webp)$/i,
+				include: `${PATHS.assets}img`,
+				exclude: [`${PATHS.assets}img/sprite/`],
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							name: 'img/[name].[ext]',
+							context: 'img'
+						}
+					},
+					optimizationImages()
+				]
+			},
 			{
 				// scss
 				test: /\.s[ac]ss$/,
