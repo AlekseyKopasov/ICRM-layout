@@ -40,21 +40,21 @@ const optimizationJs = () => {
 	if (isProd) {
 		config.minimizer = [
 			new OptimizeCssAssetWebpackPlugin(),
-			new UglifyJsPlugin({
-				sourceMap: true,
-				uglifyOptions: {
-					warnings: false,
-					parse: {},
-					compress: {},
-					mangle: false,
-					output: {
-						comments: false,
-					},
-					toplevel: true,
-					nameCache: null,
-					keep_names: false,
-				},
-			})
+			// new UglifyJsPlugin({
+			// 	sourceMap: true,
+			// 	uglifyOptions: {
+			// 		warnings: false,
+			// 		parse: {},
+			// 		compress: {},
+			// 		mangle: false,
+			// 		output: {
+			// 			comments: false,
+			// 		},
+			// 		toplevel: true,
+			// 		nameCache: null,
+			// 		keep_names: false,
+			// 	},
+			// })
 		]
 	}
 
@@ -114,7 +114,7 @@ const plugins = () => {
 		}),
 		new CopyWebpackPlugin( [
 			{ from: `${PATHS.assets}img`,
-				to: `${PATHS.dist}img`,
+        to: `${PATHS.dist}img`,
 				ignore: ['**/sprite/**']
 			},
 			{ from: `${PATHS.assets}fonts`, to: `${PATHS.dist}fonts` },
@@ -194,21 +194,22 @@ module.exports = {
 	module: {
 		rules: [
 			// SVG sprite
-			{
-				test: /\.svg$/,
-				use: [
-					{
-						loader: 'svg-sprite-loader',
-						options: {
-							extract: true,
-							esModule: false,
-							// publicPath: `${PATHS.dist}img/`,
-							outputPath: 'img/'
-						}
-					},
-					// 'svgo-loader'
-				]
-			},
+			// {
+			// 	test: /\.svg$/,
+			// 	use: [
+			// 		{
+			// 			loader: 'svg-sprite-loader',
+			// 			// include: [`${PATHS.assets}img/sprite`],
+			// 			options: {
+			// 				extract: true,
+			// 				esModule: false,
+			// 				// publicPath: `${PATHS.dist}img/`,
+			// 				outputPath: 'img/'
+			// 			}
+			// 		},
+			// 		// 'svgo-loader'
+			// 	]
+			// },
 			{
 				// Pug
 				test: /\.pug$/,
@@ -225,7 +226,7 @@ module.exports = {
 			},
 			{
 				// Fonts
-				test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+				test: /\.(woff(2)?|ttf|eot)$/,
 				loader: 'file-loader',
 				options: {
 					name: '[name].[ext]'
@@ -233,18 +234,18 @@ module.exports = {
 			},
 			{
 				// images / icons
-				test: /\.(png|jpe?g|gif|svg|webp)$/i,
+				test: /\.(png|jpe?g|gif|svg)?$/i,
 				include: `${PATHS.assets}img`,
-				exclude: [`${PATHS.assets}img/sprite/`],
+				exclude: [`${PATHS.assets}img/sprite`, `${PATHS.assets}fonst`],
 				use: [
 					{
 						loader: 'url-loader',
 						options: {
-							name: 'img/[name].[ext]',
-							context: 'img'
+							name: `[name].[ext]`,
+              // outputPath: `img/`
 						}
 					},
-					optimizationImages()
+					// optimizationImages()
 				]
 			},
 			{
