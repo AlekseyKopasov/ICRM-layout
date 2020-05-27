@@ -1,28 +1,31 @@
 // webpack.settings.js - webpack settings config
 const fs = require('fs')
+const path = require('path')
 // Webpack settings exports
 // noinspection WebpackConfigHighlighting
 
+
 module.exports = {
 	name: 'ICRM',
+
 	paths: {
 		src: {
-			base: 'src',
-			css: 'src/css',
-			js: 'src/js'
+			base: (path.resolve(__dirname, './src')),
+			css: (path.resolve(__dirname, './src/css')),
+			js: (path.resolve(__dirname, './src/js')),
 		},
 		dist: {
-			base: '/public',
+			base: '/public/',
 			clean: [
 				'**/*',
 			]
 		},
 		pages: {
-			baseDir: 'src/pug/pages',
-			pugFiles: fs.readdirSync('src/pug/pages')
+			baseDir: (path.resolve(__dirname, './src/pug/pages')),
+			pugFiles: fs.readdirSync(path.resolve(__dirname, './src/pug/pages'))
 			.filter(fileName => fileName.endsWith('.pug')),
 		},
-		assets: 'assets/'
+		assets: '/assets/'
 	},
 	urls: {
 		live: 'https://example.com/',
@@ -34,7 +37,7 @@ module.exports = {
 	},
 	entries: {
 		'libs': '/vendor.js',
-		'main': '/index.js',
+		'main': '/',
 	},
 	babelLoaderConfig: {
 		exclude: [

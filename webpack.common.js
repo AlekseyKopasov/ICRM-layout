@@ -50,6 +50,7 @@ const configureEntries = () => {
 	let entries = {};
 	for (const [key, value] of Object.entries(settings.entries)) {
 		entries[key] = path.resolve(__dirname, settings.paths.src.js + value);
+		console.log("keys!!!----->>>>", entries[key]);
 	}
 
 	return entries;
