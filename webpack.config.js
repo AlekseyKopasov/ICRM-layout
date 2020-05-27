@@ -4,7 +4,6 @@ const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 const OptimizeCssAssetWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -23,7 +22,7 @@ const PAGES = fs
 	.readdirSync(PAGES_DIR)
 	.filter(fileName => fileName.endsWith('.pug'));
 
-const optimizationJs = () => {
+const configureOptimizationSripts = () => {
 	const config = {
 		splitChunks: {
 			cacheGroups: {
@@ -61,7 +60,7 @@ const optimizationJs = () => {
 	return config
 }
 
-const optimizationImages = () => {
+const configureOptimizationImages = () => {
 	const option =
 		{
 			loader: 'image-webpack-loader',
@@ -102,7 +101,7 @@ const optimizationImages = () => {
 	return option
 }
 
-const plugins = () => {
+const configurePlugins = () => {
 	const base = [
 		new CleanWebpackPlugin({
 			verbose: true,
@@ -142,7 +141,7 @@ const plugins = () => {
 	return base
 }
 
-const cssLoaders = extra => {
+const configureCssLoaders = extra => {
 	const loaders = [
 			'style-loader',
 			{
@@ -181,7 +180,7 @@ module.exports = {
 
 	devServer: {
 		contentBase: PATHS.dist,
-		hot: true,
+		// hot: true,
 		port: 8081,
 		overlay: {
 			warnings: true,
@@ -189,27 +188,44 @@ module.exports = {
 		}
 	},
 
-	optimization: optimizationJs(),
+	optimization: configureOptimizationSripts(),
 
 	module: {
 		rules: [
+			{
+				// images / icons
+				test: /\.(png|jpe?g|gif|svg|webp)$/,
+				include: `${PATHS.assets}img`,
+				exclude: [`${PATHS.assets}img/sprite`, `${PATHS.assets}fonts`],
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: `${PATHS.assets}img/[name].[ext]`,
+							limit: 10000,
+							// outputPath: `img`
+						}
+					},
+					// optimizationImages()
+				]
+			},
 			// SVG sprite
-			// {
-			// 	test: /\.svg$/,
-			// 	use: [
-			// 		{
-			// 			loader: 'svg-sprite-loader',
-			// 			// include: [`${PATHS.assets}img/sprite`],
-			// 			options: {
-			// 				extract: true,
-			// 				esModule: false,
-			// 				// publicPath: `${PATHS.dist}img/`,
-			// 				outputPath: 'img/'
-			// 			}
-			// 		},
-			// 		// 'svgo-loader'
-			// 	]
-			// },
+			{
+				test: /\.svg$/,
+				include: [`${PATHS.assets}img/sprite`],
+				use: [
+					{
+						loader: 'svg-sprite-loader',
+						options: {
+							extract: true,
+							esModule: false,
+							// publicPath: `${PATHS.dist}img/`,
+							outputPath: `${PATHS.assets}img`
+						}
+					},
+					// 'svgo-loader'
+				]
+			},
 			{
 				// Pug
 				test: /\.pug$/,
@@ -233,30 +249,14 @@ module.exports = {
 				}
 			},
 			{
-				// images / icons
-				test: /\.(png|jpe?g|gif|svg)?$/i,
-				include: `${PATHS.assets}img`,
-				exclude: [`${PATHS.assets}img/sprite`, `${PATHS.assets}fonst`],
-				use: [
-					{
-						loader: 'url-loader',
-						options: {
-							name: `[name].[ext]`,
-              // outputPath: `img/`
-						}
-					},
-					// optimizationImages()
-				]
-			},
-			{
 				// scss
 				test: /\.s[ac]ss$/,
-				use: cssLoaders('sass-loader')
+				use: configureCssLoaders('sass-loader')
 			},
 			{
 				// css
 				test: /\.css$/,
-				use: cssLoaders()
+				use: configureCssLoaders()
 			}
 		]
 	},
@@ -267,5 +267,5 @@ module.exports = {
 		}
 	},
 
-	plugins: plugins()
+	plugins: configurePlugins()
 }
