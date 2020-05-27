@@ -50,7 +50,6 @@ const configureEntries = () => {
 	let entries = {};
 	for (const [key, value] of Object.entries(settings.entries)) {
 		entries[key] = path.resolve(__dirname, settings.paths.src.js + value);
-		console.log("keys!!!----->>>>", entries[key]);
 	}
 
 	return entries;
@@ -88,7 +87,7 @@ const baseConfig = {
 	name: pkg.name,
 	entry: configureEntries(),
 	output: {
-		path: `${settings.paths.dist.base}`,
+		path: settings.paths.dist.base,
 		publicPath: settings.urls.publicPath()
 	},
 	module: {

@@ -10,9 +10,9 @@ module.exports = {
 
 	paths: {
 		src: {
-			base: (path.resolve(__dirname, './src')),
-			css: (path.resolve(__dirname, './src/css')),
-			js: (path.resolve(__dirname, './src/js')),
+			base: './src',
+			css: './src/css',
+			js: './src/js',
 		},
 		dist: {
 			base: '/public/',
