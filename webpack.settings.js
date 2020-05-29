@@ -5,32 +5,28 @@ const path = require('path')
 // noinspection WebpackConfigHighlighting
 
 
+
 module.exports = {
 	name: 'ICRM',
-
-	paths: {
-		src: {
-			base: './src',
-			css: './src/css',
-			js: './src/js',
-		},
+	PATHS: {
+		src: path.join(__dirname, '/src'),
 		dist: {
-			base: '/public/',
+			base: path.join(__dirname, '/public/'),
 			clean: [
 				'**/*',
 			]
 		},
-		pages: {
-			baseDir: (path.resolve(__dirname, './src/pug/pages')),
-			pugFiles: fs.readdirSync(path.resolve(__dirname, './src/pug/pages'))
-			.filter(fileName => fileName.endsWith('.pug')),
-		},
-		assets: '/assets/'
+		assets: '/assets/',
+},
+	PAGES: {
+		dir: path.resolve(__dirname, './src/pug/pages'),
+		files: fs.readdirSync(path.resolve(__dirname, './src/pug/pages'))
+		.filter(fileName => fileName.endsWith('.pug')),
 	},
 	urls: {
 		live: 'https://example.com/',
 		local: 'http://example.test/',
-		publicPath: () => process.env.PUBLIC_PATH || '/src',
+		publicPath: () => process.env.PUBLIC_PATH || '',
 	},
 	vars: {
 		cssName: 'styles'

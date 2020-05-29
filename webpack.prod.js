@@ -24,13 +24,14 @@ const configureBundleAnalyzer = () => {
 	return {
 		analyzerMode: 'static',
 		reportFilename: 'report.html',
+		openAnalyzer: false,
 	};
 };
 
 // Configure Clean webpack
 const configureCleanWebpack = () => {
 	return {
-		cleanOnceBeforeBuildPatterns: settings.paths.dist.clean,
+		cleanOnceBeforeBuildPatterns: settings.PATHS.dist.clean,
 		verbose: true,
 		dry: false
 	};
@@ -41,7 +42,7 @@ const configureHtml = (page) => {
 	return (
 		new HtmlWebpackPlugin({
 			templateContent: '',
-			template: `${settings.paths.pages.baseDir}/${page}`,
+			template: `${settings.PAGES.dir}/${page}`,
 			filename: `./${page.replace(/\.pug/,'.html')}`,
 			inject: false,
 		})
@@ -121,7 +122,7 @@ const configureOptimization = () => {
 // Configure Postcss loader
 const configureCssLoader = () => {
 	return {
-		test: /\.(pcss|css)$/,
+		test: /\.(scss|css)$/,
 		use: [
 			MiniCssExtractPlugin.loader,
 			{
@@ -154,7 +155,7 @@ const configureTerser = () => {
 };
 
 // Configure pug
-const configurePug = () => {
+const configurePugLoader = () => {
 	return {
 		test: /\.pug$/,
 		loader: 'pug-loader',
@@ -170,7 +171,10 @@ module.exports = [
 		common.baseConfig,
 		{
 			output: {
-				filename: path.join('./js', '[name].[chunkhash].js'),
+				// filename: path.join('./js', '[name].[chunkhash].js'),
+				filename: 'js/[name].js',
+				path: settings.PATHS.dist.base,
+				publicPath: '/'
 			},
 			mode: 'production',
 			devtool: 'source-map',
@@ -179,7 +183,7 @@ module.exports = [
 				rules: [
 					configureCssLoader(),
 					configureImageLoader(),
-					configurePug(),
+					configurePugLoader(),
 				],
 			},
 			plugins: [
@@ -187,12 +191,11 @@ module.exports = [
 					configureCleanWebpack()
 				),
 				new MiniCssExtractPlugin({
-					path: path.resolve(__dirname, settings.paths.dist.base),
+					path: path.resolve(__dirname, settings.PATHS.dist.base),
 					filename: path.join('./css', '[name].[chunkhash].css'),
 				}),
-				...settings.paths.pages.pugFiles.map(
+				...settings.PAGES.files.map(
 					page => configureHtml(page)
-
 				),
 				new ImageminWebpWebpackPlugin(),
 				new BundleAnalyzerPlugin(

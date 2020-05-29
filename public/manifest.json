@@ -1,0 +1,13 @@
+{
+  "libs.js": "/js/libs.js",
+  "libs.js.map": "/js/libs.js.map",
+  "main.js": "/js/main.js",
+  "main.js.map": "/js/main.js.map",
+  "./components.html": "/./components.html",
+  "./index.html": "/./index.html",
+  "./login.html": "/./login.html",
+  "./pass-recovery-save.html": "/./pass-recovery-save.html",
+  "./pass-recovery-send.html": "/./pass-recovery-send.html",
+  "./profile.html": "/./profile.html",
+  "./register.html": "/./register.html"
+}

@@ -49,7 +49,7 @@ const configureBabelLoader = (browserList) => {
 const configureEntries = () => {
 	let entries = {};
 	for (const [key, value] of Object.entries(settings.entries)) {
-		entries[key] = path.resolve(__dirname, settings.paths.src.js + value);
+		entries[key] = path.resolve(__dirname, `${settings.PATHS.src}/js` + value);
 	}
 
 	return entries;
@@ -87,7 +87,7 @@ const baseConfig = {
 	name: pkg.name,
 	entry: configureEntries(),
 	output: {
-		path: settings.paths.dist.base,
+		path: path.resolve(__dirname, `${settings.PATHS.dist.base}`),
 		publicPath: settings.urls.publicPath()
 	},
 	module: {

@@ -14,7 +14,7 @@ const settings = require('./webpack.settings.js');
 const configureDevServer = () => {
 	return {
 		public: settings.devServerConfig.public(),
-		// contentBase: path.resolve(__dirname, settings.paths.pages.baseDir),
+		contentBase: settings.PATHS.dist.base,
 		host: settings.devServerConfig.host(),
 		port: settings.devServerConfig.port(),
 		https: !!parseInt(settings.devServerConfig.https()),
