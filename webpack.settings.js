@@ -4,22 +4,16 @@ const path = require('path')
 // Webpack settings exports
 // noinspection WebpackConfigHighlighting
 
-
-
 module.exports = {
 	name: 'ICRM',
 	PATHS: {
-		src: path.join(__dirname, '/src'),
-		dist: {
-			base: path.join(__dirname, '/public/'),
-			clean: [
-				'**/*',
-			]
-		},
+		src: path.join(__dirname, '/src/'),
+		dist: path.join(__dirname, '/build/'),
+		clean: ['**/*'],
 		assets: '/assets/',
 },
 	PAGES: {
-		dir: path.resolve(__dirname, './src/pug/pages'),
+		base: path.resolve(__dirname, './src/pug/pages'),
 		files: fs.readdirSync(path.resolve(__dirname, './src/pug/pages'))
 		.filter(fileName => fileName.endsWith('.pug')),
 	},
@@ -29,11 +23,11 @@ module.exports = {
 		publicPath: () => process.env.PUBLIC_PATH || '',
 	},
 	vars: {
-		cssName: 'styles'
+		cssName: 'main'
 	},
 	entries: {
-		'libs': '/vendor.js',
-		'main': '/',
+		'libs': 'js/vendor.js',
+		'main': 'index.js',
 	},
 	babelLoaderConfig: {
 		exclude: [
@@ -41,13 +35,10 @@ module.exports = {
 		],
 	},
 	devServerConfig: {
-		public: () => process.env.DEVSERVER_PUBLIC || 'http://localhost:8080',
+		public: () => process.env.DEVSERVER_PUBLIC || 'http://localhost:8081',
 		host: () => process.env.DEVSERVER_HOST || 'localhost',
 		poll: () => process.env.DEVSERVER_POLL || false,
 		port: () => process.env.DEVSERVER_PORT || 8081,
 		https: () => process.env.DEVSERVER_HTTPS || false,
-	},
-	manifestConfig: {
-		basePath: ''
 	},
 }

@@ -1,6 +1,6 @@
 // webpack.prod.js - production builds
 // node modules
-const glob = require('glob-all');
+// const glob = require('glob-all');
 const merge = require('webpack-merge');
 const path = require('path');
 const webpack = require('webpack');
@@ -31,7 +31,7 @@ const configureBundleAnalyzer = () => {
 // Configure Clean webpack
 const configureCleanWebpack = () => {
 	return {
-		cleanOnceBeforeBuildPatterns: settings.PATHS.dist.clean,
+		cleanOnceBeforeBuildPatterns: settings.PATHS.clean,
 		verbose: true,
 		dry: false
 	};
@@ -41,10 +41,10 @@ const configureCleanWebpack = () => {
 const configureHtml = (page) => {
 	return (
 		new HtmlWebpackPlugin({
-			templateContent: '',
-			template: `${settings.PAGES.dir}/${page}`,
+			template: `${settings.PAGES.base}/${page}`,
 			filename: `./${page.replace(/\.pug/,'.html')}`,
-			inject: false,
+			inject: true,
+			// chunksSortMode: 'none'
 		})
 	);
 };
@@ -57,7 +57,7 @@ const configureImageLoader = () => {
 			{
 				loader: 'file-loader',
 				options: {
-					name: 'img/[name].[hash].[ext]'
+					name: 'img/[name].[ext]'
 				}
 			},
 			{
@@ -91,13 +91,17 @@ const configureOptimization = () => {
 	return {
 		splitChunks: {
 			cacheGroups: {
-				default: false,
-				common: false,
+				default: {
+					minChunks: 2,
+					priority: -20,
+					reuseExistingChunk: true,
+				},
+				// common: false,
 				styles: {
 					name: settings.vars.cssName,
-					test: /\.(pcss|css|vue)$/,
+					test: /\.(css|scss)$/,
 					chunks: 'all',
-					enforce: true
+					enforce: true,
 				}
 			}
 		},
@@ -108,11 +112,11 @@ const configureOptimization = () => {
 			new OptimizeCSSAssetsPlugin({
 				cssProcessorOptions: {
 					map: {
-						inline: false,
-						annotation: true,
+						// inline: false,
+						// annotation: false,
 					},
-					safe: true,
-					discardComments: true
+					// safe: true,
+					discardComments: false
 				},
 			})
 		]
@@ -120,30 +124,47 @@ const configureOptimization = () => {
 };
 
 // Configure Postcss loader
-const configureCssLoader = () => {
+const configureScssLoader = () => {
 	return {
-		test: /\.(scss|css)$/,
+		test: /\.scss$/,
 		use: [
+			// 'style-loader',
 			MiniCssExtractPlugin.loader,
 			{
 				loader: 'css-loader',
-				options: {
-					importLoaders: 2,
-					sourceMap: true
-				}
-			},
-			{
-				loader: 'resolve-url-loader'
-			},
-			{
+				options: { sourceMap: true }
+			}, {
 				loader: 'postcss-loader',
-				options: {
-					sourceMap: true
-				}
+				options: { sourceMap: true, config: { path: 'postcss.config.js' } }
+			}, {
+				loader: 'sass-loader',
+				options: { sourceMap: true }
 			}
 		]
-	};
-};
+	}
+}
+// Configure css loader
+// const configureCssLoader = () => {
+// 	return {
+// 		test: /\.css$/,
+// 		use: [
+// 			// 'style-loader',
+// 			MiniCssExtractPlugin.loader,
+// 			{
+// 				loader: 'css-loader',
+// 				options: { sourceMap: true }
+// 			}, {
+// 				loader: 'postcss-loader',
+// 				options: {
+// 					sourceMap: true,
+// 					config: {
+// 						path: 'postcss.config.js'
+// 					}
+// 				}
+// 			}
+// 		]
+// 	}
+// }
 
 // Configure terser
 const configureTerser = () => {
@@ -171,17 +192,17 @@ module.exports = [
 		common.baseConfig,
 		{
 			output: {
-				// filename: path.join('./js', '[name].[chunkhash].js'),
-				filename: 'js/[name].js',
-				path: settings.PATHS.dist.base,
-				publicPath: '/'
+				filename: path.join('./js', '[name].js'),
+				// path: settings.PATHS.dist,
+				publicPath: ''
 			},
 			mode: 'production',
 			devtool: 'source-map',
 			optimization: configureOptimization(),
 			module: {
 				rules: [
-					configureCssLoader(),
+					configureScssLoader(),
+					// configureCssLoader(),
 					configureImageLoader(),
 					configurePugLoader(),
 				],
@@ -191,8 +212,7 @@ module.exports = [
 					configureCleanWebpack()
 				),
 				new MiniCssExtractPlugin({
-					path: path.resolve(__dirname, settings.PATHS.dist.base),
-					filename: path.join('./css', '[name].[chunkhash].css'),
+					filename: 'css/[name].css',
 				}),
 				...settings.PAGES.files.map(
 					page => configureHtml(page)

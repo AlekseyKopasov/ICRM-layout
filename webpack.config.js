@@ -112,10 +112,7 @@ const configurePlugins = () => {
 			filename: `${PATHS.assets}css/[name].css`
 		}),
 		new CopyWebpackPlugin( [
-			{ from: `${PATHS.assets}img`,
-        to: `${PATHS.dist}img`,
-				ignore: ['**/sprite/**']
-			},
+			{ from: `${PATHS.assets}img`, to: `${PATHS.dist}img`,	ignore: ['**/sprite/**'] },
 			{ from: `${PATHS.assets}fonts`, to: `${PATHS.dist}fonts` },
 			{ from: `${PATHS.src}/static`, to: '' }
 			],
@@ -143,7 +140,7 @@ const configurePlugins = () => {
 
 const configureCssLoaders = extra => {
 	const loaders = [
-			'style-loader',
+				'style-loader',
 			{
 				loader: 'css-loader',
 				options: { sourceMap: true }

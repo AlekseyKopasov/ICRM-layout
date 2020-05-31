@@ -5,7 +5,6 @@ const merge = require('webpack-merge');
 
 // webpack plugins
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
 
 // config files
 const pkg = require('./package.json');
@@ -25,10 +24,6 @@ const configureBabelLoader = (browserList) => {
 					[
 						'@babel/preset-env', {
 						modules: false,
-						corejs:  {
-							version: 3,
-							proposals: true
-						},
 						useBuiltIns: 'usage',
 						targets: {
 							browsers: browserList,
@@ -49,7 +44,7 @@ const configureBabelLoader = (browserList) => {
 const configureEntries = () => {
 	let entries = {};
 	for (const [key, value] of Object.entries(settings.entries)) {
-		entries[key] = path.resolve(__dirname, `${settings.PATHS.src}/js` + value);
+		entries[key] = path.resolve(__dirname, `${settings.PATHS.src}` + value)
 	}
 
 	return entries;
@@ -70,36 +65,29 @@ const configureFontLoader = () => {
 	};
 };
 
-// Configure Manifest
-const configureManifest = (fileName) => {
-	return {
-		fileName: fileName,
-		basePath: settings.manifestConfig.basePath,
-		map: (file) => {
-			file.name = file.name.replace(/(\.[a-f0-9]{32})(\..*)$/, '$2');
-			return file;
-		},
-	};
-};
-
 // The base webpack config
 const baseConfig = {
 	name: pkg.name,
 	entry: configureEntries(),
 	output: {
-		path: path.resolve(__dirname, `${settings.PATHS.dist.base}`),
-		publicPath: settings.urls.publicPath()
+		path: path.resolve(__dirname, `${settings.PATHS.dist}`),
+		// publicPath: settings.urls.publicPath(),
+		filename: 'js/[name].js'
 	},
 	module: {
 		rules: [
 			configureFontLoader(),
-			configureBabelLoader(Object.values(pkg.browserslist.modernBrowsers)),
+			configureBabelLoader(Object.values(pkg.browserslist)),
 		],
 	},
 	plugins: [
-		new ManifestPlugin(
-			configureManifest('manifest.json')
-		),
+		new CopyWebpackPlugin(
+			[
+				{ from: `${settings.PATHS.assets}img`, to: `img`,	ignore: ['**/sprite/**'] },
+				{ from: `${settings.PATHS.assets}fonts`, to: `${settings.PATHS.dist}fonts` },
+				{ from: `${settings.PATHS.src}static`, to: '' }
+			],
+		)
 	]
 };
 
