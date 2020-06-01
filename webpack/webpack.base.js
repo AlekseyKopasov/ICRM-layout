@@ -1,20 +1,20 @@
-// webpack.common.js - common webpack config
+// webpack.base.js - webpack base config
 // node modules
-const path = require('path');
-const merge = require('webpack-merge');
 
+const fs = require('fs')
+const path = require('path')
+const merge = require('webpack-merge')
 // webpack plugins
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 // config files
-const pkg = require('./package.json');
-const settings = require('./webpack.settings.js');
-
+const pkg = require('../package.json')
+// webpack constants
+const CONSTANTS = require('./webpack.const')
 // Configure Babel loader
 const configureBabelLoader = (browserList) => {
 	return {
 		test: /\.js$/,
-		exclude: settings.babelLoaderConfig.exclude,
+		exclude: CONSTANTS.babelLoaderConfig.exclude,
 		use: {
 			loader: 'babel-loader',
 			options: {
@@ -43,8 +43,8 @@ const configureBabelLoader = (browserList) => {
 // Configure Entries
 const configureEntries = () => {
 	let entries = {};
-	for (const [key, value] of Object.entries(settings.entries)) {
-		entries[key] = path.resolve(__dirname, `${settings.PATHS.src}` + value)
+	for (const [key, value] of Object.entries(CONSTANTS.ENTRIES)) {
+		entries[key] = path.resolve(__dirname, `${CONSTANTS.PATHS.src}` + value)
 	}
 
 	return entries;
@@ -65,14 +65,13 @@ const configureFontLoader = () => {
 	};
 };
 
-// The base webpack config
 const baseConfig = {
 	name: pkg.name,
 	entry: configureEntries(),
 	output: {
-		path: path.resolve(__dirname, `${settings.PATHS.dist}`),
-		// publicPath: settings.urls.publicPath(),
-		filename: 'js/[name].js'
+		filename: 'js/[name].js',
+		path: CONSTANTS.PATHS.dist,
+		publicPath: '/'
 	},
 	module: {
 		rules: [
@@ -83,13 +82,13 @@ const baseConfig = {
 	plugins: [
 		new CopyWebpackPlugin(
 			[
-				{ from: `${settings.PATHS.assets}img`, to: `img`,	ignore: ['**/sprite/**'] },
-				{ from: `${settings.PATHS.assets}fonts`, to: `${settings.PATHS.dist}fonts` },
-				{ from: `${settings.PATHS.src}static`, to: '' }
+				{ from: `${CONSTANTS.PATHS.assets}img`, to: `img`, ignore: ['**/sprite/**'] },
+				{ from: `${CONSTANTS.PATHS.assets}fonts`, to: `${CONSTANTS.PATHS.dist}fonts` },
+				{ from: `${CONSTANTS.PATHS.src}static`, to: '' }
 			],
 		)
 	]
-};
+}
 
 // Common module exports
 // noinspection WebpackConfigHighlighting

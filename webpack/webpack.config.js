@@ -167,7 +167,6 @@ module.exports = {
 	entry: {
 		libs: `${PATHS.src}/js/vendor.js`,
 		app: PATHS.src
-		// module: `${PATHS.src}/your-module.js`,
 	},
 	output: {
 		filename: 'js/[name].js',

@@ -16,7 +16,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 // config files
 const common = require('./webpack.common.js');
-const pkg = require('./package.json');
+const pkg = require('../package.json');
 const settings = require('./webpack.settings.js');
 
 // Configure Bundle Analyzer
@@ -144,27 +144,27 @@ const configureScssLoader = () => {
 	}
 }
 // Configure css loader
-// const configureCssLoader = () => {
-// 	return {
-// 		test: /\.css$/,
-// 		use: [
-// 			// 'style-loader',
-// 			MiniCssExtractPlugin.loader,
-// 			{
-// 				loader: 'css-loader',
-// 				options: { sourceMap: true }
-// 			}, {
-// 				loader: 'postcss-loader',
-// 				options: {
-// 					sourceMap: true,
-// 					config: {
-// 						path: 'postcss.config.js'
-// 					}
-// 				}
-// 			}
-// 		]
-// 	}
-// }
+const configureCssLoader = () => {
+	return {
+		test: /\.css$/,
+		use: [
+			// 'style-loader',
+			MiniCssExtractPlugin.loader,
+			{
+				loader: 'css-loader',
+				options: { sourceMap: true }
+			}, {
+				loader: 'postcss-loader',
+				options: {
+					sourceMap: true,
+					config: {
+						path: 'postcss.config.js'
+					}
+				}
+			}
+		]
+	}
+}
 
 // Configure terser
 const configureTerser = () => {
