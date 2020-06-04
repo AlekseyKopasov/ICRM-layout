@@ -1,6 +1,5 @@
 // webpack.prod.js - production builds
 // node modules
-// const glob = require('glob-all');
 const merge = require('webpack-merge');
 const path = require('path');
 const webpack = require('webpack');
@@ -8,16 +7,17 @@ const webpack = require('webpack');
 // webpack plugins
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 // config files
-const common = require('./webpack.common.js');
+const base = require('./webpack.base.js');
 const pkg = require('../package.json');
-const settings = require('./webpack.settings.js');
+
+// webpack constants
+const CONSTANTS = require('./webpack.const')
 
 // Configure Bundle Analyzer
 const configureBundleAnalyzer = () => {
@@ -31,33 +31,22 @@ const configureBundleAnalyzer = () => {
 // Configure Clean webpack
 const configureCleanWebpack = () => {
 	return {
-		cleanOnceBeforeBuildPatterns: settings.PATHS.clean,
+		cleanOnceBeforeBuildPatterns: CONSTANTS.PATHS.clean,
 		verbose: true,
 		dry: false
 	};
-};
-
-// Configure Html webpack
-const configureHtml = (page) => {
-	return (
-		new HtmlWebpackPlugin({
-			template: `${settings.PAGES.base}/${page}`,
-			filename: `./${page.replace(/\.pug/,'.html')}`,
-			inject: true,
-			// chunksSortMode: 'none'
-		})
-	);
 };
 
 // Configure Image loader
 const configureImageLoader = () => {
 	return {
 		test: /\.(png|jpe?g|gif|svg|webp)$/i,
+		include: `${CONSTANTS.PATHS.assets}img`,
 		use: [
 			{
 				loader: 'file-loader',
 				options: {
-					name: 'img/[name].[ext]'
+					name: 'img/[name].[ext]',
 				}
 			},
 			{
@@ -98,7 +87,7 @@ const configureOptimization = () => {
 				},
 				// common: false,
 				styles: {
-					name: settings.vars.cssName,
+					name: CONSTANTS.CSS_NAME,
 					test: /\.(css|scss)$/,
 					chunks: 'all',
 					enforce: true,
@@ -143,6 +132,7 @@ const configureScssLoader = () => {
 		]
 	}
 }
+
 // Configure css loader
 const configureCssLoader = () => {
 	return {
@@ -175,26 +165,15 @@ const configureTerser = () => {
 	};
 };
 
-// Configure pug
-const configurePugLoader = () => {
-	return {
-		test: /\.pug$/,
-		loader: 'pug-loader',
-		options: {
-			pretty: true
-		}
-	};
-};
-
 // Production module exports
 module.exports = [
 	merge(
-		common.baseConfig,
+		base.baseConfig,
 		{
 			output: {
 				filename: path.join('./js', '[name].js'),
-				// path: settings.PATHS.dist,
-				publicPath: ''
+				path: CONSTANTS.PATHS.dist,
+				publicPath: '/'
 			},
 			mode: 'production',
 			devtool: 'source-map',
@@ -204,7 +183,6 @@ module.exports = [
 					configureScssLoader(),
 					// configureCssLoader(),
 					configureImageLoader(),
-					configurePugLoader(),
 				],
 			},
 			plugins: [
@@ -214,10 +192,7 @@ module.exports = [
 				new MiniCssExtractPlugin({
 					filename: 'css/[name].css',
 				}),
-				...settings.PAGES.files.map(
-					page => configureHtml(page)
-				),
-				new ImageminWebpWebpackPlugin(),
+				// new ImageminWebpWebpackPlugin(), //convert to webp
 				new BundleAnalyzerPlugin(
 					configureBundleAnalyzer(),
 				),

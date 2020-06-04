@@ -10,3 +10,5 @@ import './assets/sass/style.scss'
 // import './assets/img/sprite/person.svg'
 
 // import images
+
+// import './assets/img/lynx.png'

@@ -5,40 +5,17 @@ const merge = require('webpack-merge')
 const path = require('path')
 const webpack = require('webpack')
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const LiveReloadPlugin = require('webpack-livereload-plugin')
-
 // config files
-const baseConfig = require('./webpack.base')
+const base = require('./webpack.base')
 const CONSTANTS = require('./webpack.const')
 const pkg = require('../package.json')
 
 // Configure the webpack-dev-server
 const configureDevServer = () => {
 	return {
-		publicPath: CONSTANTS.devServerConfig.public(),
 		contentBase: CONSTANTS.PATHS.dist,
-		hot: true,
 		overlay: true,
-		watchContentBase: true,
 		port: CONSTANTS.devServerConfig.port(),
-
-		// public: baseConfig.devServerConfig.public(),
-		// contentBase: baseConfig.PATHS.dist.base,
-		// host: baseConfig.devServerConfig.host(),
-		// port: baseConfig.devServerConfig.port(),
-		// https: !!parseInt(baseConfig.devServerConfig.https()),
-		// disableHostCheck: true,
-		// hot: true,
-		// overlay: true,
-		// watchContentBase: true,
-		// watchOptions: {
-		// 	poll: !!parseInt(baseConfig.devServerConfig.poll()),
-		// 	ignored: /node_modules/,
-		// },
-		// headers: {
-		// 	'Access-Control-Allow-Origin': '*'
-		// },
 	};
 };
 
@@ -46,13 +23,20 @@ const configureDevServer = () => {
 const configureImageLoader = () => {
 	return {
 		test: /\.(png|jpe?g|gif|svg|webp)$/i,
+		// include: `${CONSTANTS.PATHS.assets}img`,
 		use: [
 			{
-				loader: 'file-loader',
 				options: {
-					name: 'img/[name].[ext]'
-				}
-			}
+					name: "img/[name].[ext]",
+					outputPath: "img/"
+				},
+				loader: "url-loader"
+			}			// {
+			// 	loader: 'url?limit=50000',
+			// 	options: {
+			// 		name: 'img/[name].[ext]'
+			// 	}
+			// }
 		]
 	};
 };
@@ -79,14 +63,16 @@ const configureCssLoader = () => {
 
 // Development module exports
 module.exports = merge(
-	baseConfig,
+	base.baseConfig,
 	{
 		output: {
 			filename: path.join('./js', '[name].[hash].js'),
-			publicPath: CONSTANTS.devServerConfig.public() + '/',
+			path: CONSTANTS.PATHS.dist,
+			// publicPath: CONSTANTS.devServerConfig.public()
 		},
 		mode: 'development',
 		devtool: 'inline-source-map',
+		watch: true,
 		devServer: configureDevServer(),
 		module: {
 			rules: [

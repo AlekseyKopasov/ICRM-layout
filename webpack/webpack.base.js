@@ -1,15 +1,25 @@
 // webpack.base.js - webpack base config
-// node modules
 
+// node modules
 const fs = require('fs')
 const path = require('path')
 const merge = require('webpack-merge')
+
 // webpack plugins
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 // config files
 const pkg = require('../package.json')
+
 // webpack constants
 const CONSTANTS = require('./webpack.const')
+
+const PAGES_DIR = `${CONSTANTS.PATHS.src}/pug/pages`;
+const PAGES = fs
+.readdirSync(PAGES_DIR)
+.filter(fileName => fileName.endsWith('.pug'));
+
 // Configure Babel loader
 const configureBabelLoader = (browserList) => {
 	return {
@@ -65,18 +75,38 @@ const configureFontLoader = () => {
 	};
 };
 
+const configurePugLoader = () => {
+	return {
+		test: /\.pug$/,
+		use: [
+			{ loader: 'pug-loader' }
+		]
+	}
+}
+
+// Configure Html webpack
+const configureHtml = (page) => {
+	return (
+		new HtmlWebpackPlugin({
+			template: `${PAGES_DIR}/${page}`,
+			filename: `${page.replace(/\.pug/,'.html')}`,
+			inject: true,
+		})
+	);
+};
+
 const baseConfig = {
 	name: pkg.name,
 	entry: configureEntries(),
 	output: {
 		filename: 'js/[name].js',
-		path: CONSTANTS.PATHS.dist,
-		publicPath: '/'
+		path: CONSTANTS.PATHS.dist
 	},
 	module: {
 		rules: [
 			configureFontLoader(),
 			configureBabelLoader(Object.values(pkg.browserslist)),
+			configurePugLoader(),
 		],
 	},
 	plugins: [
@@ -86,7 +116,10 @@ const baseConfig = {
 				{ from: `${CONSTANTS.PATHS.assets}fonts`, to: `${CONSTANTS.PATHS.dist}fonts` },
 				{ from: `${CONSTANTS.PATHS.src}static`, to: '' }
 			],
-		)
+		),
+		...PAGES.map(
+			page => configureHtml(page)
+		),
 	]
 }
 
