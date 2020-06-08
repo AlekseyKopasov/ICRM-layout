@@ -87,7 +87,7 @@
 }
 
 .header .dropdown-content li > a {
-  @include basic-effect();
+  @include basic-hover-effect();
 
   &:active {
     color: $color-gray;

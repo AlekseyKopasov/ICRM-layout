@@ -3,13 +3,13 @@
     <Header />
     <div class="page">
       <Sidebar />
-      <div class="page__content">
-        <nuxt />
-      </div>
-      <div class="page__footer">
-        <Footer />
+      <div class="page__wrap">
+        <div class="page__content">
+          <nuxt />
+        </div>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 

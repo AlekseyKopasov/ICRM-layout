@@ -5,7 +5,9 @@
       type="button"
       aria-label="Показать или скрыть сайдбар"
       @click="toggleSidebar"
-    ></button>
+    >
+      <span></span>
+    </button>
     <ul class="sidebar__menu">
       <li class="sidebar__menu-item">
         <a class="sidebar__menu-link" href=""

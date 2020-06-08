@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   min-height: 100vh;
   min-width: $width-min;
@@ -11,20 +11,12 @@
   overflow-x: hidden;
 }
 
-.page__content {
+.page__wrap {
   position: relative;
   width: 100%;
-  margin-left: 20%;
-}
-
-.page__content.collapse {
-  margin-left: 0;
 }
 
 .page__footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
   flex-shrink: 0;
+  width: 100%;
 }
