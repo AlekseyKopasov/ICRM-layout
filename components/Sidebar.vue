@@ -9,65 +9,11 @@
       <span></span>
     </button>
     <ul class="sidebar__menu">
-      <li class="sidebar__menu-item">
-        <a class="sidebar__menu-link" href=""
-          ><span class="sidebar__menu-icon"></span
-          ><span class="sidebar__menu-title">menu item</span></a
-        >
-      </li>
-      <li class="sidebar__menu-item">
-        <a class="sidebar__menu-link" href=""
-          ><span class="sidebar__menu-icon"></span
-          ><span class="sidebar__menu-title">menu item</span></a
-        >
-      </li>
-      <li class="sidebar__menu-item">
-        <a class="sidebar__menu-link" href=""
-          ><span class="sidebar__menu-icon"></span
-          ><span class="sidebar__menu-title">menu item</span></a
-        >
-      </li>
-      <li class="sidebar__menu-item">
-        <a class="sidebar__menu-link" href=""
-          ><span class="sidebar__menu-icon"></span
-          ><span class="sidebar__menu-title">menu item</span></a
-        >
-      </li>
-      <li class="sidebar__menu-item">
-        <a class="sidebar__menu-link" href=""
-          ><span class="sidebar__menu-icon"></span
-          ><span class="sidebar__menu-title">menu item</span></a
-        >
-      </li>
-      <li class="sidebar__menu-item">
-        <a class="sidebar__menu-link" href=""
-          ><span class="sidebar__menu-icon"></span
-          ><span class="sidebar__menu-title">menu item</span></a
-        >
-      </li>
-      <li class="sidebar__menu-item">
-        <a class="sidebar__menu-link" href=""
-          ><span class="sidebar__menu-icon"></span
-          ><span class="sidebar__menu-title">menu item</span></a
-        >
-      </li>
-      <li class="sidebar__menu-item">
-        <a class="sidebar__menu-link" href=""
-          ><span class="sidebar__menu-icon"></span
-          ><span class="sidebar__menu-title">menu item</span></a
-        >
-      </li>
-      <li class="sidebar__menu-item">
-        <a class="sidebar__menu-link" href=""
-          ><span class="sidebar__menu-icon"></span
-          ><span class="sidebar__menu-title">menu item</span></a
-        >
-      </li>
-      <li class="sidebar__menu-item">
-        <a class="sidebar__menu-link" href=""
-          ><span class="sidebar__menu-icon"></span
-          ><span class="sidebar__menu-title">menu item</span></a
-        >
+      <li v-for="(item, index) of menu" :key="index" class="sidebar__menu-item">
+        <nuxt-link class="sidebar__menu-link" :to="item.link">
+          <span class="sidebar__menu-icon">{{ item.icon }}</span>
+          <span class="sidebar__menu-title">{{ item.title }}</span>
+        </nuxt-link>
       </li>
     </ul>
   </aside>
@@ -78,6 +24,11 @@ export default {
   data: () => ({
     isCollapsed: false
   }),
+  computed: {
+    menu() {
+      return this.$store.getters['sidebar-menu/menu']
+    }
+  },
   methods: {
     toggleSidebar() {
       this.isCollapsed = !this.isCollapsed

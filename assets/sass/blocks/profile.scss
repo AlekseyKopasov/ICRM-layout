@@ -1,5 +1,168 @@
 .profile {
   display: flex;
   width: 100%;
-  transition: padding $transition-props;
+  padding-left: 40px;
+}
+
+.profile h1 {
+  margin-bottom: 30px;
+}
+
+.profile__user {
+  display: flex;
+  padding-bottom: 45px;
+  margin-bottom: 50px;
+}
+
+.profile__avatar {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border: 1px solid $color-gray;
+  margin-right: 25px;
+  flex-shrink: 0;
+}
+
+.profile__avatar-image {
+  width: 150px;
+  height: 100%;
+  object-fit: cover;
+  padding: 5px;
+}
+
+.profile__edit {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  color: $color-gray;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  cursor: pointer;
+
+  @include basic-hover-effect();
+}
+
+.profile__edit-icon {
+  display: block;
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+  background-color: red;
+}
+
+.profile__avatar .profile__edit {
+  bottom: -30px;
+  left: 0;
+}
+
+.profile__user-data {
+  position: relative;
+  width: 100%;
+}
+
+.profile__user-data .profile__edit {
+  bottom: auto;
+  left: 0;
+  top: 45px;
+  width: 125px;
+}
+
+.profile__user-name {
+  display: flex;
+  width: 100%;
+}
+
+.profile__firstname {
+  margin-right: 10px;
+}
+
+.profile__contacts {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.profile__contacts-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.profile__info-title {
+  position: relative;
+  margin: 0;
+  margin-bottom: 15px;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: auto;
+    margin-top: 1px;
+    margin-left: 10px;
+    width: 100%;
+    height: 1px;
+    background-color: $color-gray;
+  }
+}
+
+.profile__info-add-new {
+  margin: 0;
+  margin-bottom: 30px;
+}
+
+.profile__contacts p {
+  margin-top: 30px;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: $main-font;
+  text-align: center;
+}
+
+.profile__contacts-header h3 {
+  padding: 15px;
+  position: relative;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  cursor: pointer;
+
+  @include basic-hover-effect();
+
+  color: $color-black;
+
+  &:first-child {
+    border-right: 1px solid $color-gray;
+  }
+
+  &.active {
+    position: relative;
+
+    &:hover::after,
+    &:focus::after {
+      @include basic-hover-effect();
+
+      background-color: $color-indigo;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 1px;
+      width: inherit;
+
+      background-color: $color-gray;
+    }
+  }
 }
