@@ -34,15 +34,74 @@
         <button class="btn profile__info-add-new" type="button">
           Добавить новый
         </button>
-        <form action="/" class="profile__add-form">
-          <div class="input-field">
-            <select>
-              <option value="" selected>Choose your option</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-            </select>
-            <label>Materialize Select</label>
+        <form action="/" class="contacts-form">
+          <div class="contacts-form__wrap">
+            <div class="contacts-form__title">
+              <h4 class="title title-small">Категория</h4>
+            </div>
+            <div class="contacts-form__field">
+              <div class="input-field">
+                <select ref="select" class="contacts-form__select">
+                  <option value="1">Поставщики</option>
+                  <option value="2">Клиенты</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="contacts-form__wrap">
+            <div class="contacts-form__title">
+              <h4 class="title title-small">Название</h4>
+            </div>
+            <div class="contacts-form__field">
+              <input type="text" placeholder="Заголовок контакта" />
+            </div>
+          </div>
+
+          <div class="contacts-form__wrap">
+            <div class="contacts-form__title">
+              <h4 class="title title-small">Адрес</h4>
+            </div>
+            <div class="contacts-form__field contacts-form__field--address">
+              <div class="contacts-form__address">
+                <input
+                  id="form-address"
+                  class="contacts-form__checkbox"
+                  type="checkbox"
+                />
+                <label for="form-address">Добавить адрес</label>
+              </div>
+              <input type="text" placeholder="Введите адрес" />
+            </div>
+          </div>
+
+          <div class="contacts-form__wrap contacts-form__wrap--links">
+            <div class="contacts-form__title">
+              <h4 class="title title-small">Ссылки</h4>
+            </div>
+            <div class="contacts-form__field">
+              <div class="input-field">
+                <select ref="select" class="contacts-form__select">
+                  <option value="" selected disabled>Тип</option>
+                  <option value="1">Сайт</option>
+                  <option value="2">Социальная сеть</option>
+                  <option value="3">Месседжер</option>
+                  <option value="4">Email</option>
+                  <option value="5">Телефон</option>
+                </select>
+              </div>
+              <div class="contacts-form__links-wrap">
+                <input type="text" placeholder="Название" />
+                <input type="text" placeholder="Ссылка" />
+                <button class="btn btn-green" type="button">
+                  Добавить
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="contacts-form-wrap contacts-form-wrap--links">
+            <div class="contacts-form-wrap"></div>
           </div>
         </form>
         <div class="profile__contacts">
@@ -63,7 +122,15 @@
 </template>
 
 <script>
+// import M from 'materialize-css'
 export default {
-  layout: 'main-layout'
+  layout: 'main-layout',
+  created() {
+    if (typeof window !== 'undefined') {
+      const M = require('materialize-css')
+
+      M.FormSelect.init(this.$refs.select)
+    }
+  }
 }
 </script>
