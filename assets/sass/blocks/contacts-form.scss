@@ -1,6 +1,7 @@
 .contacts-form {
   max-width: 800px;
   margin: 0 auto;
+  margin-bottom: 55px;
   display: flex;
   flex-direction: column;
 }
@@ -9,7 +10,11 @@
   width: 100%;
   margin-bottom: 25px;
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
+
+  .contacts-form__field input {
+    margin: 0;
+  }
 }
 
 .contacts-form__title {
@@ -21,10 +26,6 @@
   display: flex;
 }
 
-.contacts-form__field--address {
-  align-items: baseline;
-}
-
 .contacts-form__field .input-field {
   margin: 0;
   width: 100%;
@@ -33,33 +34,31 @@
 .contacts-form__address {
   display: flex;
   align-items: center;
-  width: 200px;
+  width: 400px;
+}
 
-  & label {
-    padding-left: 25px;
+.contacts-form__wrap--links {
+  .contacts-form__field {
+    flex-direction: column;
+  }
+
+  .contacts-form__links-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+  }
+
+  .contacts-form__links-wrap input {
+    width: 35%;
+  }
+
+  button {
+    margin-left: 25px;
   }
 }
 
-.contacts-form__address .contacts-form__checkbox,
-.contacts-form .contacts-form__select {
-  // TODO fix this styles
-  display: flex;
-  opacity: 1;
-}
-
-.contacts-form__wrap--links  .contacts-form__field {
-  flex-wrap: wrap;
-}
-
-.contacts-form__links-wrap {
-
-}
-
-.contacts-form__wrap--links .contacts-form__field {
-  // width: 50%;
-  // margin-right: 25px;
-
-  // &:last-child {
-  //   margin-right: 0;
-  // }
+.contacts-form__submit {
+  margin-top: 25px;
+  width: 25%;
 }

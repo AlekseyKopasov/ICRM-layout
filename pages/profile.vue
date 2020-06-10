@@ -30,10 +30,13 @@
       <div class="profile__info">
         <h2 class="profile__info-title title title-middle">
           Контакты
+          <button
+            class="btn waves-effect waves-light profile__info-add-new"
+            type="button"
+          >
+            Добавить новый
+          </button>
         </h2>
-        <button class="btn profile__info-add-new" type="button">
-          Добавить новый
-        </button>
         <form action="/" class="contacts-form">
           <div class="contacts-form__wrap">
             <div class="contacts-form__title">
@@ -41,7 +44,7 @@
             </div>
             <div class="contacts-form__field">
               <div class="input-field">
-                <select ref="select" class="contacts-form__select">
+                <select ref="select" class="select contacts-form__select">
                   <option value="1">Поставщики</option>
                   <option value="2">Клиенты</option>
                 </select>
@@ -64,12 +67,14 @@
             </div>
             <div class="contacts-form__field contacts-form__field--address">
               <div class="contacts-form__address">
-                <input
-                  id="form-address"
-                  class="contacts-form__checkbox"
-                  type="checkbox"
-                />
-                <label for="form-address">Добавить адрес</label>
+                <label>
+                  <input
+                    id="form-address"
+                    class="contacts-form__checkbox"
+                    type="checkbox"
+                  />
+                  <span>Добавить адрес</span>
+                </label>
               </div>
               <input type="text" placeholder="Введите адрес" />
             </div>
@@ -81,8 +86,7 @@
             </div>
             <div class="contacts-form__field">
               <div class="input-field">
-                <select ref="select" class="contacts-form__select">
-                  <option value="" selected disabled>Тип</option>
+                <select ref="select" class="select contacts-form__select">
                   <option value="1">Сайт</option>
                   <option value="2">Социальная сеть</option>
                   <option value="3">Месседжер</option>
@@ -93,16 +97,21 @@
               <div class="contacts-form__links-wrap">
                 <input type="text" placeholder="Название" />
                 <input type="text" placeholder="Ссылка" />
-                <button class="btn btn-green" type="button">
-                  Добавить
+                <button
+                  class="btn btn-green waves-effect waves-light"
+                  type="button"
+                >
+                  +
                 </button>
               </div>
             </div>
           </div>
-
-          <div class="contacts-form-wrap contacts-form-wrap--links">
-            <div class="contacts-form-wrap"></div>
-          </div>
+          <button
+            class="btn waves-effect waves-light contacts-form__submit"
+            type="submit"
+          >
+            Сохранить контакт
+          </button>
         </form>
         <div class="profile__contacts">
           <div class="profile__contacts-header">
@@ -122,15 +131,10 @@
 </template>
 
 <script>
-// import M from 'materialize-css'
 export default {
   layout: 'main-layout',
-  created() {
-    if (typeof window !== 'undefined') {
-      const M = require('materialize-css')
-
-      M.FormSelect.init(this.$refs.select)
-    }
+  mounted() {
+    this.$materialize.select()
   }
 }
 </script>

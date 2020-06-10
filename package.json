@@ -15,7 +15,6 @@
     "@nuxtjs/axios": "^5.11.0",
     "@nuxtjs/pwa": "^3.0.0-0",
     "@nuxtjs/svg-sprite": "^0.4.10",
-    "materialize-css": "^1.0.0-rc.2",
     "normalize.css": "^8.0.1",
     "nuxt": "^2.0.0"
   },
@@ -28,6 +27,7 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-nuxt": ">=0.4.2",
     "eslint-plugin-prettier": "^3.1.2",
+    "materialize-css": "^1.0.0-rc.2",
     "node-sass": "^4.14.1",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",

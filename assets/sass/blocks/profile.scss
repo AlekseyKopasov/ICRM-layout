@@ -94,28 +94,56 @@
   justify-content: center;
 }
 
+.profile__info {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
 .profile__info-title {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin: 0;
-  margin-bottom: 15px;
+  margin-bottom: 55px;
   overflow: hidden;
 
-  &::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: auto;
-    margin-top: 1px;
-    margin-left: 10px;
-    width: 100%;
-    height: 1px;
-    background-color: $color-gray;
-  }
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   top: 50%;
+  //   left: auto;
+  //   margin-top: 1px;
+  //   margin-left: 10px;
+  //   width: 100%;
+  //   height: 1px;
+  //   background-color: $color-gray;
+  // }
 }
 
 .profile__info-add-new {
-  margin: 0;
-  margin-bottom: 30px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  text-align: center;
+
+  font-size: 18px;
+  font-weight: 400;
+  font-family: $main-font;
+  text-transform: none;
+  
+  @include basic-hover-effect();
+
+  &:hover,
+  &:focus {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  transition: opacity $transition-props;
 }
 
 .profile__contacts p {

@@ -1,5 +1,3 @@
-import webpack from 'webpack'
-
 export default {
   mode: 'universal',
   /*
@@ -24,6 +22,12 @@ export default {
         href: 'https://fonts.googleapis.com/icon?family=Material+Icons'
       },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      {
+        src:
+          'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'
+      }
     ]
   },
   /*
@@ -37,7 +41,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['@/plugins/materialize'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -62,23 +66,9 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {
-      if (ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    },
-    plugins: [
-      new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery',
-        Materialize: 'materialize-css'
-      })
-    ]
+    // vendor: ['materialize-plugin'],
+    // plugins: ['plugins/materialize-plugin'],
+
+    extend(config, ctx) {}
   }
 }
