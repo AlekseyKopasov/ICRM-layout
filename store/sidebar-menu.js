@@ -1,18 +1,33 @@
 export const state = () => ({
   menu: [
     {
-      icon: 'icon',
-      title: 'title 1',
+      icon: '',
+      title: 'Планирование',
       link: '#'
     },
     {
-      icon: 'icon',
-      title: 'title 2',
+      icon: '',
+      title: 'Календарь',
       link: '#'
     },
     {
-      icon: 'icon',
-      title: 'title 3',
+      icon: '',
+      title: 'Заказы',
+      link: '#'
+    },
+    {
+      icon: '',
+      title: 'Контакты',
+      link: '#'
+    },
+    {
+      icon: '',
+      title: 'История',
+      link: '#'
+    },
+    {
+      icon: '',
+      title: 'Полезное',
       link: '#'
     }
   ]

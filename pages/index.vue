@@ -23,6 +23,9 @@
       <li>
         <nuxt-link to="/profile">profile.html --- Профиль</nuxt-link>
       </li>
+      <li>
+        <nuxt-link to="/modal">modal.html --- Модальное окно</nuxt-link>
+      </li>
       <hr />
       <li>
         <nuxt-link to="/components">components.html --- UI KIT</nuxt-link>
@@ -30,7 +33,3 @@
     </ul>
   </div>
 </template>
-
-<script>
-export default {}
-</script>

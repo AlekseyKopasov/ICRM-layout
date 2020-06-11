@@ -1,0 +1,39 @@
+.contacts-table td {
+  &:first-of-type {
+    position: relative;
+  }
+}
+
+.contacts-table tr {
+  position: relative;
+  height: 100%;
+
+  &:hover {
+    .buttons-action {
+      display: flex;
+    }
+  }
+}
+
+.contacts-table__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.contacts-table__list li {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 1px solid $color-gray;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.contacts-table__btn {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
