@@ -1,7 +1,5 @@
 # icrm-nuxt
 
-> My astonishing Nuxt.js project
-
 ## Build Setup
 
 ```bash
