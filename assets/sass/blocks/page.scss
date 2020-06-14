@@ -1,0 +1,22 @@
+.page {
+  // position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  min-height: 100vh;
+  min-width: $width-min;
+
+  background-color: $color-theme-bg-light;
+  overflow-x: hidden;
+}
+
+.page__wrap {
+  // position: relative;
+  width: 100%;
+}
+
+.page__footer {
+  flex-shrink: 0;
+  width: 100%;
+}

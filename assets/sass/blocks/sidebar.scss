@@ -1,0 +1,113 @@
+.sidebar {
+  position: relative;
+  width: 25%;
+  box-shadow: 4px 0 4px -4px rgba($color-black-hex, 0.75);
+  transition: width $transition-props;
+
+  z-index: 2;
+}
+
+.sidebar__menu,
+ul.sidebar__menu:not(.browser-default) {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  width: 100%;
+  transition: $transition-props;
+}
+
+.sidebar__button {
+  position: absolute;
+  top: 12px;
+  right: -50px;
+  width: 30px;
+  height: 30px;
+
+  border: none;
+  background-color: transparent;
+
+  z-index: 10;
+  cursor: pointer;
+
+  & span {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 2px;
+
+    background-color: $color-gray;
+    transition: opacity $transition-props;
+  }
+
+  &:hover {
+    background-color: transparent;
+    opacity: 0.7;
+
+    span,
+    span::after,
+    span::before {
+      background-color: $color-indigo;
+    }
+  }
+
+  &:focus {
+    background-color: transparent;
+  }
+
+  &:active {
+    opacity: 1;
+  }
+
+  & span::before,
+  & span::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+
+    background-color: $color-gray;
+  }
+
+  & span::before {
+    transform: translateY(-7px);
+  }
+
+  & span::after {
+    transform: translateY(7px);
+  }
+}
+
+.sidebar__menu-item {
+  position: relative;
+}
+
+.sidebar__menu-icon {
+  // TODO dev only
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: purple;
+}
+
+.sidebar__menu-link {
+  display: block;
+  padding: 21px 44px;
+}
+
+// animation sidebar
+.sidebar.collapse {
+  width: 0;
+
+  .sidebar__menu {
+    transform: translateX(-9999px);
+    transition: transform $transition-props;
+  }
+}

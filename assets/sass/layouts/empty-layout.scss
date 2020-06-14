@@ -1,0 +1,8 @@
+.empty-layout {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(darken($color-indigo-hex, 45), 0.6);
+}

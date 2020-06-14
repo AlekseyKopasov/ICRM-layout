@@ -1,6 +1,0 @@
-mixin picture(path, imgType, altText, width)
-  picture
-    //- source(type="image/webp" srcset=path + ".webp 1x, " + path + "@2x.webp 2x, ")
-    //- img(src=path +"."+ imgType srcset=path + "@2x." + imgType + " 2x" alt=altText width= width ? width : null)
-    source(type="image/webp" srcset=`${path}.webp 1x, ${path}@2x.webp 2x`)
-    img(src=`${path}.${imgType}` srcset=`${path}@2x.${imgType} 2x` alt=altText width= width ? width : null loading="lazy")

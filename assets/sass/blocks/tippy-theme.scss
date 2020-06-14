@@ -1,0 +1,15 @@
+.tippy-box[data-theme ~= "custom-light-theme"] {
+  padding: 10px;
+  background-color: var(--light);
+  color: $color-black;
+  font-size: 18px;
+  border: 1px solid $color-gray;
+  border-radius: 3px;
+  box-shadow: 0 0 4px 0 rgba($color-black-hex, 0.3);
+}
+
+.tippy-box[data-theme ~= "custom-light-theme"][data-placement ^= "left"] > .tippy-arrow::before {
+  border-left-color: $color-gray;
+  right: 0;
+  transform: translateX(100%);
+}
