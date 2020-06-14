@@ -11,7 +11,12 @@ const materialize = {
   select(options = {}) {
     const elems = document.querySelectorAll('.select')
     M.FormSelect.init(elems, options)
-  }
+  },
+  modal(options = {}) {
+    const elems = document.querySelectorAll('.modal')
+    M.Modal.init(elems, options)
+
+  },
 }
 
 export default (context, inject) => {

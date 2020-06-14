@@ -6,25 +6,38 @@
         <div class="profile__avatar">
           <img
             class="profile__avatar-image"
-            src="../assets/img/test-ava.jpg"
+            :src="require(`@/assets/img/${filename}`)"
             alt="Аватар"
           />
           <span class="profile__edit">
-            <span class="profile__edit-icon">icon</span>
+            <span class="profile__edit-icon">
+              <svg-icon name="isrm-sprite/idit" />
+            </span>
             Изменить
           </span>
         </div>
         <div class="profile__user-data">
           <div class="profile__user-name">
-            <p class="profile__firstname">Константин</p>
-            <p class="profile__lastname">
-              Константинопольский-Константинопольский
-            </p>
+            <button
+              class="btn waves-effect waves-light profile__edit"
+              type="button"
+            >
+              <svg-icon name="isrm-sprite/idit" />
+              Редактировать
+            </button>
+            <!-- <div class="input-field">
+              <label for="user-name">Имя</label>
+              <input id="user-name" type="text" />
+            </div>
+            <div class="input-field">
+              <label for="user-lastname">Фамилия</label>
+              <input id="user-lastname" type="text" />
+            </div> -->
+            <div class="profile__user-name-wrap">
+              <p class="profile__firstname">{{ info.name }}</p>
+              <p class="profile__lastname">{{ info.lastname }}</p>
+            </div>
           </div>
-          <span class="profile__edit">
-            <span class="profile__edit-icon">icon</span>
-            Редактировать
-          </span>
         </div>
       </div>
       <div class="profile__info">
@@ -145,17 +158,12 @@
                     </td>
                     <td>Россия, Нижний Новгород, ул. Мира 25</td>
                     <td>
-                      <ul class="contacts-table__list">
-                        <li><span>Телеграмм</span> <a href="">www.t.me</a></li>
-                        <li>
-                          <span>Skype</span> <a href="">www.t.me/example</a>
-                        </li>
-                        <li>
-                          <span>Email</span>
-                          <a href="">konstantinopolsky@gmail.com</a>
-                        </li>
-                        <li><span>VK</span> <a href="">www.t.me</a></li>
-                      </ul>
+                      <a
+                        class="waves-effect waves-light btn btn-green modal-trigger"
+                        href="#modal"
+                        aria-label="Открыть модальное окно с ссылками и контактами"
+                        >Посмотреть контакты</a
+                      >
                     </td>
                   </tr>
                   <tr>
@@ -165,7 +173,14 @@
                     </td>
                     <td>Alan</td>
                     <td></td>
-                    <td></td>
+                    <td>
+                      <a
+                        class="waves-effect waves-light btn btn-green modal-trigger"
+                        href="#modal"
+                        aria-label="Открыть модальное окно с ссылками и контактами"
+                        >Посмотреть контакты</a
+                      >
+                    </td>
                   </tr>
                   <tr>
                     <td>
@@ -175,12 +190,12 @@
                     <td>Jonathan</td>
                     <td>Россия, Нижний Новгород, ул. Мира 25</td>
                     <td>
-                      <button
-                        class="btn btn-green waves-effect waves-light contacts-table__btn"
-                        type="button"
+                      <a
+                        class="waves-effect waves-light btn btn-green modal-trigger"
+                        href="#modal"
+                        aria-label="Открыть модальное окно с ссылками и контактами"
+                        >Посмотреть контакты</a
                       >
-                        Посмотреть контакты
-                      </button>
                     </td>
                   </tr>
                 </tbody>
@@ -190,20 +205,42 @@
         </div>
       </div>
     </div>
+
+    <Modal>
+      <template v-slot:title>Сохраненные ссылки</template>
+
+      <ul class="modal__list">
+        <li class="modal__item">
+          <h4 class="modal__item-title">Instagram</h4>
+          <a href="#" class="modal__link">www.insta.com</a>
+          <ButtonsAction />
+        </li>
+      </ul>
+    </Modal>
   </main>
 </template>
 
 <script>
 import ButtonsAction from '@/components/contacts-table/ButtonsAction'
+import Modal from '@/components/Modal'
 
 export default {
   layout: 'main-layout',
   components: {
-    ButtonsAction
+    ButtonsAction,
+    Modal
   },
   data() {
     return {
-      createFormShow: false
+      filename: this.$store.getters['user-data/info'].avatar,
+      createFormShow: false,
+      clientsContacts: [],
+      suppliersContacts: []
+    }
+  },
+  computed: {
+    info() {
+      return this.$store.getters['user-data/info']
     }
   },
   mounted() {
