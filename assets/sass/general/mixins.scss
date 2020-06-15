@@ -88,16 +88,39 @@
   color: $color-gray;
   transition: opacity $transition-props;
 
-  &:hover,
-  &:focus {
+  & svg {
+    transition: opacity $transition-props;
+  }
+
+  &:hover {
     color: $color-indigo;
     opacity: 0.7;
     background-color: var(--light);
   }
 
+  &:focus {
+    opacity: 0.7;
+    color: $color-gray;
+    background-color: var(--light);
+  }
+
+  &:hover svg {
+    fill: $color-indigo;
+    background-color: transparent;
+  }
+
+  &:focus svg {
+    opacity: 0.7;
+    fill: $color-gray;
+  }
+
   &:active {
     opacity: 1;
     background-color: rgba($color-gray-dark-hex, 0.1);
+  }
+
+  &:active svg {
+    background-color: transparent;
   }
 }
 

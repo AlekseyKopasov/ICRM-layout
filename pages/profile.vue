@@ -6,37 +6,50 @@
         <div class="profile__avatar">
           <img
             class="profile__avatar-image"
-            :src="require(`@/assets/img/${filename}`)"
+            :src="require(`@/assets/img/${userAvatar}`)"
             alt="Аватар"
           />
-          <span class="profile__edit">
-            <span class="profile__edit-icon">
-              <svg-icon name="isrm-sprite/idit" />
+          <button class="profile__edit-btn" type="button">
+            <span>
+              <svg-icon name="isrm-sprite/edit" />
             </span>
             Изменить
-          </span>
+          </button>
         </div>
         <div class="profile__user-data">
           <div class="profile__user-name">
             <button
-              class="btn waves-effect waves-light profile__edit"
+              class="profile__edit-btn"
+              :class="{ hide: isHidden }"
               type="button"
+              @click="changeUserName"
             >
-              <svg-icon name="isrm-sprite/idit" />
+              <span>
+                <svg-icon name="isrm-sprite/edit" />
+              </span>
               Редактировать
             </button>
-            <!-- <div class="input-field">
+            <div class="profile__user-name-wrap" :class="{ hide: isHidden }">
+              <p class="profile__firstname">{{ info.name }}</p>
+              <p class="profile__lastname">{{ info.lastname }}</p>
+            </div>
+          </div>
+          <div class="profile__user-name-edit" :class="{ hide: !isHidden }">
+            <div class="input-field">
               <label for="user-name">Имя</label>
               <input id="user-name" type="text" />
             </div>
             <div class="input-field">
               <label for="user-lastname">Фамилия</label>
               <input id="user-lastname" type="text" />
-            </div> -->
-            <div class="profile__user-name-wrap">
-              <p class="profile__firstname">{{ info.name }}</p>
-              <p class="profile__lastname">{{ info.lastname }}</p>
             </div>
+            <button
+              class="btn waves-effect waves-light profile__user-edit-save"
+              type="button"
+              @click="saveUserName"
+            >
+              Сохранить
+            </button>
           </div>
         </div>
       </div>
@@ -230,17 +243,28 @@ export default {
     ButtonsAction,
     Modal
   },
+  fetch({ store }) {
+    this.user = store.getters['user-data/user']
+
+    if (this.user.name.length === 0 || this.user.lastname.length === 0) {
+      this.isHidden = true
+    }
+  },
   data() {
     return {
-      filename: this.$store.getters['user-data/info'].avatar,
       createFormShow: false,
       clientsContacts: [],
-      suppliersContacts: []
+      suppliersContacts: [],
+      isHidden: false,
+      user: {},
+      userAvatar: this.$store.getters['user-data/user'].avatar,
+      userName: '',
+      userLastname: ''
     }
   },
   computed: {
     info() {
-      return this.$store.getters['user-data/info']
+      return this.user
     }
   },
   mounted() {
@@ -249,7 +273,19 @@ export default {
   methods: {
     createContact() {
       this.createFormShow = true
+    },
+    changeUserName() {
+      this.isHidden = true
+    },
+    saveUserName() {
+      this.isHidden = false
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.hidden {
+  display: none;
+}
+</style>

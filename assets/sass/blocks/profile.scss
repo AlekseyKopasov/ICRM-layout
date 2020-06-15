@@ -15,7 +15,9 @@
 }
 
 .profile__avatar {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 150px;
   height: 150px;
   border: 1px solid $color-gray;
@@ -28,24 +30,38 @@
   height: 100%;
   object-fit: cover;
   padding: 5px;
+  margin-bottom: 5px;
 }
 
-.profile__edit {
+.profile__edit-btn {
   display: flex;
-  width: 100%;
   align-items: center;
   justify-content: center;
+  order: 2;
+  margin: 0;
+  padding: 0;
 
   font-size: 14px;
   color: $color-gray;
 
-  position: absolute;
-  bottom: 0;
-  left: 0;
-
-  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 
   @include basic-hover-effect();
+
+  & svg {
+    width: 24px;
+    height: 24px;
+
+    @include basic-hover-effect();
+  }
+
+  &:hover {
+    background-color: transparent;
+  }
+
+  cursor: pointer;
 }
 
 .profile__edit-icon {
@@ -53,12 +69,6 @@
   width: 25px;
   height: 25px;
   margin-right: 5px;
-  // background-color: red;
-}
-
-.profile__avatar .profile__edit {
-  bottom: -30px;
-  left: 0;
 }
 
 .profile__user-data {
@@ -66,20 +76,58 @@
   width: 100%;
 }
 
-.profile__user-data .profile__edit {
-  bottom: auto;
-  left: 0;
-  top: 45px;
-  width: 125px;
-}
-
 .profile__user-name {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 500px;
   width: 100%;
+}
+
+.profile__user-name-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.profile__firstname,
+.profile__lastname {
+  margin: 0;
+  padding: 0;
 }
 
 .profile__firstname {
   margin-right: 10px;
+}
+
+.profile__user-name-edit {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 500px;
+  width: 100%;
+
+  .input-field {
+    width: 45%;
+    margin: 0;
+    margin-bottom: 15px;
+    padding: 0;
+  }
+
+  input[type="text"]:not(.browser-default) {
+    height: auto;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin: 0;
+  }
+}
+
+.profile__user-edit-save {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 150px;
+  width: 100%;
 }
 
 .profile__contacts {
