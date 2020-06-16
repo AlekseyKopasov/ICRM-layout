@@ -30,27 +30,36 @@
               Редактировать
             </button>
             <div class="profile__user-name-wrap" :class="{ hide: isHidden }">
-              <p class="profile__firstname">{{ info.name }}</p>
-              <p class="profile__lastname">{{ info.lastname }}</p>
+              <p class="profile__firstname">{{ name }}</p>
+              <p class="profile__lastname">{{ lastname }}</p>
             </div>
           </div>
-          <div class="profile__user-name-edit" :class="{ hide: !isHidden }">
+          <form
+            action="/"
+            class="profile__user-name-edit"
+            :class="{ hide: !isHidden }"
+            @submit.prevent="saveUserName"
+          >
             <div class="input-field">
               <label for="user-name">Имя</label>
-              <input id="user-name" type="text" />
+              <input id="user-name" v-model="name" type="text" required />
             </div>
             <div class="input-field">
               <label for="user-lastname">Фамилия</label>
-              <input id="user-lastname" type="text" />
+              <input
+                id="user-lastname"
+                v-model="lastname"
+                type="text"
+                required
+              />
             </div>
             <button
               class="btn waves-effect waves-light profile__user-edit-save"
-              type="button"
-              @click="saveUserName"
+              type="submit"
             >
               Сохранить
             </button>
-          </div>
+          </form>
         </div>
       </div>
       <div class="profile__info">
@@ -243,23 +252,18 @@ export default {
     ButtonsAction,
     Modal
   },
-  fetch({ store }) {
-    this.user = store.getters['user-data/user']
-
-    if (this.user.name.length === 0 || this.user.lastname.length === 0) {
-      this.isHidden = true
-    }
-  },
   data() {
     return {
-      createFormShow: false,
-      clientsContacts: [],
-      suppliersContacts: [],
       isHidden: false,
-      user: {},
-      userAvatar: this.$store.getters['user-data/user'].avatar,
-      userName: '',
-      userLastname: ''
+      user: this.$store.getters['user-data/user'],
+      userAvatar: this.$store.getters['user-data/user'].avatar || '',
+      name: this.$store.getters['user-data/user'].name || '',
+      lastname: this.$store.getters['user-data/user'].lastname || '',
+
+      createFormShow: false,
+
+      clientsContacts: [],
+      suppliersContacts: []
     }
   },
   computed: {
@@ -269,6 +273,10 @@ export default {
   },
   mounted() {
     this.$materialize.select()
+
+    if (this.user.name.length === 0 || this.user.lastname.length === 0) {
+      this.isHidden = true
+    }
   },
   methods: {
     createContact() {
@@ -279,6 +287,10 @@ export default {
     },
     saveUserName() {
       this.isHidden = false
+      this.$store.commit('user-data/setUser', {
+        name: this.name,
+        lastname: this.lastname
+      })
     }
   }
 }

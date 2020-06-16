@@ -1,9 +1,7 @@
 export const state = () => ({
   user: {
-    // name: 'Константин',
-    // lastname: 'Константинопольский-Константинопольский',
-    name: '',
-    lastname: '',
+    name: 'Константин',
+    lastname: 'Константинопольский-Константинопольский',
     avatar: 'test-ava.jpg'
   }
 })
