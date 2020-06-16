@@ -15,7 +15,7 @@
               <button class="profile__edit-btn" type="button">
                 <span>
                   <svg-icon name="isrm-sprite/edit" />
-                  <input type="file" ref="avatar-input" />
+                  <input ref="avatar-input" type="file" />
                 </span>
                 Изменить
               </button>
@@ -164,14 +164,25 @@
         </form>
         <div class="profile__contacts">
           <div class="profile__contacts-header">
-            <h3 class="title title-small active">Поставщики</h3>
-            <h3 class="title title-small active">Клиенты</h3>
+            <h3
+              class="title title-small"
+              :class="{ active: isActive }"
+              data-suppliers
+              @click="showContactsTable()"
+            >
+              Поставщики
+            </h3>
+            <h3
+              class="title title-small"
+              :class="{ active: !isActive }"
+              data-clients
+              @click="showContactsTable()"
+            >
+              Клиенты
+            </h3>
           </div>
           <div class="profile__contacts-wrap">
-            <p>
-              Пока нет контактов. Добавьте новый.
-            </p>
-            <div class="contacts-table">
+            <div v-if="hasEmptyList" class="contacts-table">
               <table class="responsive-table highlight">
                 <thead>
                   <tr>
@@ -183,47 +194,15 @@
                 </thead>
 
                 <tbody>
-                  <tr>
+                  <tr v-for="(contact, index) of contactsList" :key="index">
                     <td>
                       <ButtonsAction />
-                      1
+                      {{ index + 1 }}
                     </td>
                     <td>
-                      Lorem ipsum dolor sit amet.
+                      {{ contact.name }}
                     </td>
-                    <td>Россия, Нижний Новгород, ул. Мира 25</td>
-                    <td>
-                      <a
-                        class="waves-effect waves-light btn btn-green modal-trigger"
-                        href="#modal"
-                        aria-label="Открыть модальное окно с ссылками и контактами"
-                        >Посмотреть контакты</a
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <ButtonsAction />
-                      2
-                    </td>
-                    <td>Alan</td>
-                    <td></td>
-                    <td>
-                      <a
-                        class="waves-effect waves-light btn btn-green modal-trigger"
-                        href="#modal"
-                        aria-label="Открыть модальное окно с ссылками и контактами"
-                        >Посмотреть контакты</a
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <ButtonsAction />
-                      3
-                    </td>
-                    <td>Jonathan</td>
-                    <td>Россия, Нижний Новгород, ул. Мира 25</td>
+                    <td>{{ contact.address }}</td>
                     <td>
                       <a
                         class="waves-effect waves-light btn btn-green modal-trigger"
@@ -236,6 +215,9 @@
                 </tbody>
               </table>
             </div>
+            <p v-else>
+              Пока нет контактов. Добавьте новый.
+            </p>
           </div>
         </div>
       </div>
@@ -268,6 +250,7 @@ export default {
   data() {
     return {
       isHidden: false,
+      isActive: true,
       user: this.$store.getters['user-data/user'],
       userAvatar: this.$store.getters['user-data/user'].avatar || '',
       name: this.$store.getters['user-data/user'].name || '',
@@ -275,13 +258,16 @@ export default {
 
       createFormShow: false,
 
-      clientsContacts: [],
-      suppliersContacts: []
+      // contactsList: this.$store.getters['contacts-table/suppliers']
+      contactsList: []
     }
   },
   computed: {
     info() {
       return this.user
+    },
+    hasEmptyList() {
+      return this.contactsList.length !== 0
     }
   },
   mounted() {
@@ -321,6 +307,19 @@ export default {
         avatar: file.name
       })
       this.$refs.avatar.src = url
+    },
+    async showContactsTable() {
+      if (!event.target.classList.contains('active')) {
+        this.isActive = !this.isActive
+
+        const current = Object.keys(event.target.dataset)[1]
+        this.contactsList = await this.$store.getters[
+          `contacts-table/${current}`
+        ]
+        console.log('-----------cl', this.contactsList.length)
+        // получить список ссылок данной таблицы
+        // передать ссылки в модальное окно
+      }
     }
   }
 }
