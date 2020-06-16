@@ -5,16 +5,29 @@
       <div class="profile__user">
         <div class="profile__avatar">
           <img
+            ref="avatar"
             class="profile__avatar-image"
             :src="require(`@/assets/img/${userAvatar}`)"
             alt="Аватар"
           />
-          <button class="profile__edit-btn" type="button">
-            <span>
-              <svg-icon name="isrm-sprite/edit" />
-            </span>
-            Изменить
-          </button>
+          <form action="/">
+            <div class="file-field input-field">
+              <button class="profile__edit-btn" type="button">
+                <span>
+                  <svg-icon name="isrm-sprite/edit" />
+                  <input type="file" ref="avatar-input" />
+                </span>
+                Изменить
+              </button>
+              <div class="file-path-wrapper">
+                <input
+                  class="file-path validate"
+                  type="text"
+                  @change="changeAvatar"
+                />
+              </div>
+            </div>
+          </form>
         </div>
         <div class="profile__user-data">
           <div class="profile__user-name">
@@ -291,6 +304,23 @@ export default {
         name: this.name,
         lastname: this.lastname
       })
+    },
+    async changeAvatar(e) {
+      const readURL = file => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader()
+          reader.onload = e => resolve(e.target.result)
+          reader.onerror = e => reject(e)
+          reader.readAsDataURL(file)
+        })
+      }
+
+      const file = this.$refs['avatar-input'].files[0]
+      const url = await readURL(file)
+      this.$store.commit('user-data/setUser', {
+        avatar: file.name
+      })
+      this.$refs.avatar.src = url
     }
   }
 }
@@ -298,6 +328,15 @@ export default {
 
 <style lang="scss" scoped>
 .hidden {
+  display: none;
+}
+
+.file-field {
+  margin: 0;
+  padding: 0;
+}
+
+.file-path-wrapper {
   display: none;
 }
 </style>
