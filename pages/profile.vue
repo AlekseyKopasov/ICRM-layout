@@ -208,6 +208,7 @@
                         class="waves-effect waves-light btn btn-green modal-trigger"
                         href="#modal"
                         aria-label="Открыть модальное окно с ссылками и контактами"
+                        @click="modalLinksOpen(contact.links)"
                         >Посмотреть контакты</a
                       >
                     </td>
@@ -227,9 +228,13 @@
       <template v-slot:title>Сохраненные ссылки</template>
 
       <ul class="modal__list">
-        <li class="modal__item">
-          <h4 class="modal__item-title">Instagram</h4>
-          <a href="#" class="modal__link">www.insta.com</a>
+        <li
+          class="modal__item"
+          v-for="(item, index) in modalLinks"
+          :key="index"
+        >
+          <h4 class="modal__item-title">{{ item.name }}</h4>
+          <a href="#" class="modal__link">{{ item.link }}</a>
           <ButtonsAction />
         </li>
       </ul>
@@ -249,6 +254,7 @@ export default {
   },
   data() {
     return {
+      // TODO рефакторинг дата
       isHidden: false,
       isActive: true,
       user: this.$store.getters['user-data/user'],
@@ -258,8 +264,8 @@ export default {
 
       createFormShow: false,
 
-      // contactsList: this.$store.getters['contacts-table/suppliers']
-      contactsList: []
+      contactsList: [],
+      modalLinks: []
     }
   },
   computed: {
@@ -267,7 +273,7 @@ export default {
       return this.user
     },
     hasEmptyList() {
-      return this.contactsList.length !== 0
+      return this.contactsList
     }
   },
   mounted() {
@@ -276,6 +282,8 @@ export default {
     if (this.user.name.length === 0 || this.user.lastname.length === 0) {
       this.isHidden = true
     }
+
+    this.contactsList = this.$store.getters['contacts-table/suppliers']
   },
   methods: {
     createContact() {
@@ -308,18 +316,25 @@ export default {
       })
       this.$refs.avatar.src = url
     },
-    async showContactsTable() {
+    showContactsTable() {
       if (!event.target.classList.contains('active')) {
         this.isActive = !this.isActive
 
-        const current = Object.keys(event.target.dataset)[1]
-        this.contactsList = await this.$store.getters[
-          `contacts-table/${current}`
-        ]
-        console.log('-----------cl', this.contactsList.length)
-        // получить список ссылок данной таблицы
+        // добавить контакты в дата и загружать только если добавятся новые
+        // тоже для модального окна
+        // добавить анимацию появления таблицы
+        const current = Object.keys(event.target.dataset)[0]
+
+        const currentList = this.$store.getters[`contacts-table/${current}`]
+        console.log('currentList---', currentList)
+        this.contactsList = currentList
         // передать ссылки в модальное окно
       }
+    },
+    modalLinksOpen(arr) {
+      this.modalLinks = []
+      this.modalLinks = arr
+      console.log(this.modalLinks)
     }
   }
 }
