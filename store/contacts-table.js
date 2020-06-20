@@ -2,7 +2,7 @@ export const state = () => ({
   table: {
     clients: [
       {
-        name: 'Lorem1',
+        name: 'client1',
         address: 'Россия, Нижний Новгород, ул. Мира 25',
         links: [
           {
@@ -28,7 +28,7 @@ export const state = () => ({
         ]
       },
       {
-        name: 'Lore2',
+        name: 'client2',
         address: 'Россия, Нижний Новгород, ул. Мира 25',
         links: [
           {
@@ -54,7 +54,33 @@ export const state = () => ({
         ]
       },
       {
-        name: 'Lorem3',
+        name: 'client3',
+        address: 'Россия, Нижний Новгород, ул. Мира 25',
+        links: [
+          {
+            name: 'clients3',
+            link: 'www/www'
+          },
+          {
+            name: 'instagram',
+            link: 'www/www'
+          },
+          {
+            name: 'instagram',
+            link: 'www/www'
+          },
+          {
+            name: 'instagram',
+            link: 'www/www'
+          },
+          {
+            name: 'instagram',
+            link: 'www/www'
+          }
+        ]
+      },
+      {
+        name: 'client3',
         address: 'Россия, Нижний Новгород, ул. Мира 25',
         links: [
           {
@@ -160,12 +186,31 @@ export const state = () => ({
         ]
       }
     ]
+  },
+  isEditingRow: {
+    status: false,
+    index: null
+  },
+  isDeleteRow: {
+    status: false,
+    index: null
   }
 })
 
 export const getters = {
   clients: s => s.table.clients,
-  suppliers: s => s.table.suppliers
+  suppliers: s => s.table.suppliers,
+  isEditingRow: s => s.isEditingRow,
+  isDeleteRow: s => s.isDeleteRow
 }
-export const mutations = {}
+export const mutations = {
+  editingRow(getters, index) {
+    getters.isEditingRow.status = !getters.isEditingRow.status
+    getters.isEditingRow.index = index
+  },
+  deleteRow(getters, index) {
+    getters.isDeleteRow.status = !getters.isDeleteRow.status
+    getters.isDeleteRow.index = index
+  }
+}
 export const actions = {}

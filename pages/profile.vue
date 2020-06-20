@@ -167,7 +167,7 @@
             <h3
               class="title title-small"
               :class="{ active: isActive }"
-              data-suppliers
+              data-type="suppliers"
               @click="showContactsTable()"
             >
               Поставщики
@@ -175,7 +175,7 @@
             <h3
               class="title title-small"
               :class="{ active: !isActive }"
-              data-clients
+              data-type="clients"
               @click="showContactsTable()"
             >
               Клиенты
@@ -194,15 +194,22 @@
                 </thead>
 
                 <tbody>
-                  <tr v-for="(contact, index) of contactsList" :key="index">
+                  <tr
+                    v-for="(contact, index) of contactsList"
+                    :key="index"
+                    @currentRowEdit="onEditRow"
+                    @currentDeleteEdit="onDeleteRow"
+                  >
                     <td>
-                      <ButtonsAction />
+                      <ButtonsAction v-show="!inEditing" :index="index" />
                       {{ index + 1 }}
                     </td>
                     <td>
                       {{ contact.name }}
                     </td>
-                    <td>{{ contact.address }}</td>
+                    <td>
+                      {{ contact.address }}
+                    </td>
                     <td>
                       <a
                         class="waves-effect waves-light btn btn-green modal-trigger"
@@ -229,9 +236,9 @@
 
       <ul class="modal__list">
         <li
-          class="modal__item"
           v-for="(item, index) in modalLinks"
           :key="index"
+          class="modal__item"
         >
           <h4 class="modal__item-title">{{ item.name }}</h4>
           <a href="#" class="modal__link">{{ item.link }}</a>
@@ -244,12 +251,16 @@
 
 <script>
 import ButtonsAction from '@/components/contacts-table/ButtonsAction'
+// import ContactEditName from '@/components/contacts-table/ContactEditName'
+// import ContactEditAddress from '@/components/contacts-table/ContactEditAddress'
 import Modal from '@/components/Modal'
 
 export default {
   layout: 'main-layout',
   components: {
     ButtonsAction,
+    // ContactEditName,
+    // ContactEditAddress,
     Modal
   },
   data() {
@@ -257,13 +268,13 @@ export default {
       // TODO рефакторинг дата
       isHidden: false,
       isActive: true,
+      inEditing: false,
       user: this.$store.getters['user-data/user'],
       userAvatar: this.$store.getters['user-data/user'].avatar || '',
       name: this.$store.getters['user-data/user'].name || '',
       lastname: this.$store.getters['user-data/user'].lastname || '',
 
       createFormShow: false,
-
       contactsList: [],
       modalLinks: []
     }
@@ -320,21 +331,25 @@ export default {
       if (!event.target.classList.contains('active')) {
         this.isActive = !this.isActive
 
-        // добавить контакты в дата и загружать только если добавятся новые
-        // тоже для модального окна
+        // добавить loader для таблицы
         // добавить анимацию появления таблицы
-        const current = Object.keys(event.target.dataset)[0]
+        const dataSetTarget = event.target.dataset.type
+
+        const current = dataSetTarget
 
         const currentList = this.$store.getters[`contacts-table/${current}`]
-        console.log('currentList---', currentList)
         this.contactsList = currentList
-        // передать ссылки в модальное окно
       }
     },
     modalLinksOpen(arr) {
       this.modalLinks = []
       this.modalLinks = arr
-      console.log(this.modalLinks)
+    },
+    onEditRow(cur) {
+      console.log('edit', cur)
+    },
+    onDeleteRow() {
+      // console.log('del')
     }
   }
 }
@@ -345,12 +360,19 @@ export default {
   display: none;
 }
 
-.file-field {
+.file-field,
+.input-field,
+.input-field input[type='text']:not(.browser-default) {
   margin: 0;
   padding: 0;
 }
 
 .file-path-wrapper {
   display: none;
+}
+
+.modal-trigger {
+  max-width: 210px;
+  margin: 0 auto;
 }
 </style>
