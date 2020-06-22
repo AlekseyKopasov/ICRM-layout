@@ -196,27 +196,14 @@
                 <tbody>
                   <tr v-for="(contact, index) of contactsList" :key="index">
                     <td>
-                      <ButtonsAction v-show="editing" :index="index" />
+                      <ButtonsAction v-show="!isEditing" :index="index" />
                       {{ index + 1 }}
                     </td>
                     <td>
-                      <div v-if="editing">
-                        {{ contact.name }}
-                      </div>
-                      <div v-else class="input-field">
-                        <label for="edit-name">Email</label>
-                        <input id="edit-name" type="text" />
-                      </div>
+                      {{ contact.name }}
                     </td>
                     <td>
-                      <div v-if="editing">
-                        {{ contact.address }}
-                      </div>
-                      <div v-else class="input-field">
-                        <label for="edit-name">Email</label>
-                        <input id="edit-name" type="text" />
-                        <button>Save</button>
-                      </div>
+                      {{ contact.address }}
                     </td>
                     <td>
                       <a
@@ -250,22 +237,23 @@
         >
           <h4 class="modal__item-title">{{ item.name }}</h4>
           <a href="#" class="modal__link">{{ item.link }}</a>
-          <ButtonsAction />
+          <ButtonsAction :index="index" />
         </li>
       </ul>
     </Modal>
-
-    <!-- <div v-if="editing">Edit</div>
-    <div v-else>No Edit</div> -->
   </main>
 </template>
 
 <script>
-/* eslint-disable */
+// TODO
+// добавить loader для таблицы
+// добавить анимацию появления таблицы
+// добавить пагинацию для таблицы
 import ButtonsAction from '@/components/contacts-table/ButtonsAction'
 import Modal from '@/components/Modal'
 
 export default {
+  name: 'Profile',
   layout: 'main-layout',
   components: {
     ButtonsAction,
@@ -273,14 +261,13 @@ export default {
   },
   data() {
     return {
-      // TODO рефакторинг дата
       isHidden: false,
       isActive: true,
       isEditing: false,
-      user: this.$store.getters['user-data/user'],
-      userAvatar: this.$store.getters['user-data/user'].avatar || '',
-      name: this.$store.getters['user-data/user'].name || '',
-      lastname: this.$store.getters['user-data/user'].lastname || '',
+      user: null,
+      userAvatar: null,
+      name: null,
+      lastname: null,
 
       createFormShow: false,
       contactsList: [],
@@ -293,15 +280,17 @@ export default {
     },
     hasEmptyList() {
       return this.contactsList
-    },
-    editing() {
-      this.isEditing = this.$store.getters['contacts-table/isEditingRow']
-      console.log(this.isEditing)
-      return this.isEditing
     }
+  },
+  created() {
+    this.user = this.$store.getters['user-data/user']
+    this.userAvatar = this.$store.getters['user-data/user'].avatar
+    this.name = this.$store.getters['user-data/user'].name
+    this.lastname = this.$store.getters['user-data/user'].lastname
   },
   mounted() {
     this.$materialize.select()
+    this.$materialize.updateTextField()
 
     if (this.user.name.length === 0 || this.user.lastname.length === 0) {
       this.isHidden = true
@@ -344,8 +333,6 @@ export default {
       if (!event.target.classList.contains('active')) {
         this.isActive = !this.isActive
 
-        // добавить loader для таблицы
-        // добавить анимацию появления таблицы
         const dataSetTarget = event.target.dataset.type
 
         const current = dataSetTarget
@@ -357,19 +344,7 @@ export default {
     modalLinksOpen(arr) {
       this.modalLinks = []
       this.modalLinks = arr
-    },
-    test() {
-      const a = this.$on('editingRow')
-      console.log('editingRow', a)
     }
-    // async onEditRow(cur) {
-    //   const st = this.$root.$on('editingRow')
-    //   this.isEditing = await this.$store.getters['contacts-table/editingRow']
-    //   console.log(st)
-    // },
-    // onDeleteRow() {
-    //   // console.log('del')
-    // }
   }
 }
 </script>
@@ -377,13 +352,6 @@ export default {
 <style lang="scss" scoped>
 .hidden {
   display: none;
-}
-
-.file-field,
-.input-field,
-.input-field input[type='text']:not(.browser-default) {
-  margin: 0;
-  padding: 0;
 }
 
 .file-path-wrapper {

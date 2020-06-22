@@ -19,13 +19,18 @@
 
 <script>
 export default {
-  props: ['index'],
+  props: {
+    index: {
+      type: Number,
+      required: true
+    }
+  },
   methods: {
     editingRow() {
-      this.$emit('editingRow')
-      this.$store.commit('contacts-table/editingRow', {
-        index: this.$props.index
-      })
+      this.$bus.$emit('editingRow', this.$props.index)
+      // this.$store.commit('contacts-table/editingRow', {
+      //   index: this.$props.index
+      // })
     },
     deleteRow() {
       this.$store.commit('contacts-table/deleteRow', {

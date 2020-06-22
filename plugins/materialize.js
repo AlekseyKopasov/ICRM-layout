@@ -15,8 +15,10 @@ const materialize = {
   modal(options = {}) {
     const elems = document.querySelectorAll('.modal')
     M.Modal.init(elems, options)
-
   },
+  updateTextField() {
+    M.updateTextFields()
+  }
 }
 
 export default (context, inject) => {
