@@ -194,21 +194,29 @@
                 </thead>
 
                 <tbody>
-                  <tr
-                    v-for="(contact, index) of contactsList"
-                    :key="index"
-                    @currentRowEdit="onEditRow"
-                    @currentDeleteEdit="onDeleteRow"
-                  >
+                  <tr v-for="(contact, index) of contactsList" :key="index">
                     <td>
-                      <ButtonsAction v-show="!inEditing" :index="index" />
+                      <ButtonsAction v-show="editing" :index="index" />
                       {{ index + 1 }}
                     </td>
                     <td>
-                      {{ contact.name }}
+                      <div v-if="editing">
+                        {{ contact.name }}
+                      </div>
+                      <div v-else class="input-field">
+                        <label for="edit-name">Email</label>
+                        <input id="edit-name" type="text" />
+                      </div>
                     </td>
                     <td>
-                      {{ contact.address }}
+                      <div v-if="editing">
+                        {{ contact.address }}
+                      </div>
+                      <div v-else class="input-field">
+                        <label for="edit-name">Email</label>
+                        <input id="edit-name" type="text" />
+                        <button>Save</button>
+                      </div>
                     </td>
                     <td>
                       <a
@@ -246,21 +254,21 @@
         </li>
       </ul>
     </Modal>
+
+    <!-- <div v-if="editing">Edit</div>
+    <div v-else>No Edit</div> -->
   </main>
 </template>
 
 <script>
+/* eslint-disable */
 import ButtonsAction from '@/components/contacts-table/ButtonsAction'
-// import ContactEditName from '@/components/contacts-table/ContactEditName'
-// import ContactEditAddress from '@/components/contacts-table/ContactEditAddress'
 import Modal from '@/components/Modal'
 
 export default {
   layout: 'main-layout',
   components: {
     ButtonsAction,
-    // ContactEditName,
-    // ContactEditAddress,
     Modal
   },
   data() {
@@ -268,7 +276,7 @@ export default {
       // TODO рефакторинг дата
       isHidden: false,
       isActive: true,
-      inEditing: false,
+      isEditing: false,
       user: this.$store.getters['user-data/user'],
       userAvatar: this.$store.getters['user-data/user'].avatar || '',
       name: this.$store.getters['user-data/user'].name || '',
@@ -285,6 +293,11 @@ export default {
     },
     hasEmptyList() {
       return this.contactsList
+    },
+    editing() {
+      this.isEditing = this.$store.getters['contacts-table/isEditingRow']
+      console.log(this.isEditing)
+      return this.isEditing
     }
   },
   mounted() {
@@ -345,12 +358,18 @@ export default {
       this.modalLinks = []
       this.modalLinks = arr
     },
-    onEditRow(cur) {
-      console.log('edit', cur)
-    },
-    onDeleteRow() {
-      // console.log('del')
+    test() {
+      const a = this.$on('editingRow')
+      console.log('editingRow', a)
     }
+    // async onEditRow(cur) {
+    //   const st = this.$root.$on('editingRow')
+    //   this.isEditing = await this.$store.getters['contacts-table/editingRow']
+    //   console.log(st)
+    // },
+    // onDeleteRow() {
+    //   // console.log('del')
+    // }
   }
 }
 </script>

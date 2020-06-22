@@ -3,14 +3,14 @@
     <button
       class="btn btn-green waves-effect waves-light"
       type="button"
-      @click="rowEdit"
+      @click="editingRow"
     >
       {{ index }}
     </button>
     <button
       class="btn red waves-effect waves-light"
       type="button"
-      @click="rowDelete"
+      @click="deleteRow"
     >
       X
     </button>
@@ -21,12 +21,13 @@
 export default {
   props: ['index'],
   methods: {
-    rowEdit() {
+    editingRow() {
+      this.$emit('editingRow')
       this.$store.commit('contacts-table/editingRow', {
         index: this.$props.index
       })
     },
-    rowDelete() {
+    deleteRow() {
       this.$store.commit('contacts-table/deleteRow', {
         index: this.$props.index
       })

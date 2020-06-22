@@ -204,7 +204,7 @@ export const getters = {
   isDeleteRow: s => s.isDeleteRow
 }
 export const mutations = {
-  editingRow(getters, index) {
+  editingRow(getters, { index }) {
     getters.isEditingRow.status = !getters.isEditingRow.status
     getters.isEditingRow.index = index
   },
