@@ -1,0 +1,36 @@
+.orders__status {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.orders__status-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.orders__status-color {
+  display: block;
+  width: 50px;
+  height: 25px;
+  border: 1px solid $color-gray;
+
+  &--red {
+    background-color: red;
+  }
+
+  &--blue {
+    background-color: blue;
+  }
+
+  &--green {
+    background-color: green;
+  }
+
+  &--yellow {
+    background-color: yellow;
+  }
+}
