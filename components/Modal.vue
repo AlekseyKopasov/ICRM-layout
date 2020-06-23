@@ -33,6 +33,6 @@ export default {
   name: 'Modal',
   mounted() {
     this.$materialize.modal()
-  }
+  },
 }
 </script>

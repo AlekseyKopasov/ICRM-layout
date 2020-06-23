@@ -22,8 +22,8 @@ export default {
   props: {
     index: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     editingRow() {
@@ -34,9 +34,9 @@ export default {
     },
     deleteRow() {
       this.$store.commit('contacts-table/deleteRow', {
-        index: this.$props.index
+        index: this.$props.index,
       })
-    }
-  }
+    },
+  },
 }
 </script>

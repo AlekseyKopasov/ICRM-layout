@@ -22,17 +22,17 @@
 <script>
 export default {
   data: () => ({
-    isCollapsed: false
+    isCollapsed: false,
   }),
   computed: {
     menu() {
       return this.$store.getters['sidebar-menu/menu']
-    }
+    },
   },
   methods: {
     toggleSidebar() {
       this.isCollapsed = !this.isCollapsed
-    }
-  }
+    },
+  },
 }
 </script>

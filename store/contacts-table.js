@@ -7,25 +7,25 @@ export const state = () => ({
         links: [
           {
             name: 'clients1',
-            link: '1cwww/www'
+            link: '1cwww/www',
           },
           {
             name: '2cinstagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: '3cinstagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: '4cinstagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: '5instagram',
-            link: 'www/www'
-          }
-        ]
+            link: 'www/www',
+          },
+        ],
       },
       {
         name: 'client2',
@@ -33,25 +33,25 @@ export const state = () => ({
         links: [
           {
             name: 'clients2',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
-          }
-        ]
+            link: 'www/www',
+          },
+        ],
       },
       {
         name: 'client3',
@@ -59,25 +59,25 @@ export const state = () => ({
         links: [
           {
             name: 'clients3',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
-          }
-        ]
+            link: 'www/www',
+          },
+        ],
       },
       {
         name: 'client3',
@@ -85,26 +85,26 @@ export const state = () => ({
         links: [
           {
             name: 'clients3',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
-          }
-        ]
-      }
+            link: 'www/www',
+          },
+        ],
+      },
     ],
     suppliers: [
       {
@@ -113,25 +113,25 @@ export const state = () => ({
         links: [
           {
             name: 'suppliers1',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
-          }
-        ]
+            link: 'www/www',
+          },
+        ],
       },
       {
         name: 'supplier 2',
@@ -139,25 +139,25 @@ export const state = () => ({
         links: [
           {
             name: 'suppliers2',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
-          }
-        ]
+            link: 'www/www',
+          },
+        ],
       },
       {
         name: 'supplier 3',
@@ -165,43 +165,43 @@ export const state = () => ({
         links: [
           {
             name: 'suppliers3',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
+            link: 'www/www',
           },
           {
             name: 'instagram',
-            link: 'www/www'
-          }
-        ]
-      }
-    ]
+            link: 'www/www',
+          },
+        ],
+      },
+    ],
   },
   isEditingRow: {
     status: false,
-    index: null
+    index: null,
   },
   isDeleteRow: {
     status: false,
-    index: null
-  }
+    index: null,
+  },
 })
 
 export const getters = {
   clients: s => s.table.clients,
   suppliers: s => s.table.suppliers,
   isEditingRow: s => s.isEditingRow,
-  isDeleteRow: s => s.isDeleteRow
+  isDeleteRow: s => s.isDeleteRow,
 }
 export const mutations = {
   editingRow(getters, { index }) {
@@ -211,6 +211,6 @@ export const mutations = {
   deleteRow(getters, index) {
     getters.isDeleteRow.status = !getters.isDeleteRow.status
     getters.isDeleteRow.index = index
-  }
+  },
 }
 export const actions = {}

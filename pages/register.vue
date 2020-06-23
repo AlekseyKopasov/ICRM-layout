@@ -49,6 +49,6 @@
 
 <script>
 export default {
-  layout: 'empty'
+  layout: 'empty',
 }
 </script>

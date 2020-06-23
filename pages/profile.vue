@@ -257,7 +257,7 @@ export default {
   layout: 'main-layout',
   components: {
     ButtonsAction,
-    Modal
+    Modal,
   },
   data() {
     return {
@@ -271,7 +271,7 @@ export default {
 
       createFormShow: false,
       contactsList: [],
-      modalLinks: []
+      modalLinks: [],
     }
   },
   computed: {
@@ -280,7 +280,7 @@ export default {
     },
     hasEmptyList() {
       return this.contactsList
-    }
+    },
   },
   created() {
     this.user = this.$store.getters['user-data/user']
@@ -309,7 +309,7 @@ export default {
       this.isHidden = false
       this.$store.commit('user-data/setUser', {
         name: this.name,
-        lastname: this.lastname
+        lastname: this.lastname,
       })
     },
     async changeAvatar(e) {
@@ -325,7 +325,7 @@ export default {
       const file = this.$refs['avatar-input'].files[0]
       const url = await readURL(file)
       this.$store.commit('user-data/setUser', {
-        avatar: file.name
+        avatar: file.name,
       })
       this.$refs.avatar.src = url
     },
@@ -344,8 +344,8 @@ export default {
     modalLinksOpen(arr) {
       this.modalLinks = []
       this.modalLinks = arr
-    }
-  }
+    },
+  },
 }
 </script>
 

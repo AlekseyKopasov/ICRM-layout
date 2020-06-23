@@ -3,36 +3,36 @@ export const state = () => ({
     {
       icon: '',
       title: 'Планирование',
-      link: '#'
+      link: '#',
     },
     {
       icon: '',
       title: 'Календарь',
-      link: '#'
+      link: '#',
     },
     {
       icon: '',
       title: 'Заказы',
-      link: '#'
+      link: '#',
     },
     {
       icon: '',
       title: 'Контакты',
-      link: '#'
+      link: '#',
     },
     {
       icon: '',
       title: 'История',
-      link: '#'
+      link: '#',
     },
     {
       icon: '',
       title: 'Полезное',
-      link: '#'
-    }
-  ]
+      link: '#',
+    },
+  ],
 })
 
 export const getters = {
-  menu: s => s.menu
+  menu: s => s.menu,
 }
