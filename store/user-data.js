@@ -2,7 +2,7 @@ export const state = () => ({
   user: {
     name: 'Константин',
     lastname: 'Константинопольский-Константинопольский',
-    avatar: 'test-ava.jpg'
+    avatar: 'test-ava.jpg',
   },
 })
 
@@ -17,10 +17,10 @@ export const mutations = {
 }
 
 export const actions = {
-  addUser({
-    commit
-  }) {
+  addUser({ commit }) {
     const user = this.getters.user
     commit('setUser', user)
   },
 }
+
+console.log(123)

@@ -10,6 +10,8 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint:fix": "eslint --ext .js,.vue --ignore-path .gitignore . --fix --color",
+    "prettier": "prettier --write *.js --ignore-path .gitignore .",
     "precommit": "lint-staged"
   },
   "dependencies": {
@@ -36,10 +38,15 @@
     "sass-loader": "^8.0.2",
     "stylelint": "^10.1.0"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
-    "*.{js, vue}": [
-      "node_modules/.bin/eslint --max-warnings=0",
+    "*.(js|vue)": [
       "prettier --write",
+      "npm run lint:fix",
       "git add"
     ]
   }
