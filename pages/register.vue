@@ -4,24 +4,15 @@
       <h1 class="title title-middle">Регистрация</h1>
       <div class="form-group">
         <div class="input-field">
-          <input id="register-email" class="validate" type="email" /><i
-            class="material-icons tiny"
-            >email</i
-          >
+          <input id="register-email" class="validate" type="email" />
           <label for="register-email">Email</label><small>Введите email</small>
         </div>
         <div class="input-field">
-          <input id="register-pass" class="validate" type="password" /><i
-            class="material-icons tiny"
-            >vpn_key</i
-          >
+          <input id="register-pass" class="validate" type="password" />
           <label for="register-pass">Пароль</label><small>Введите пароль</small>
         </div>
         <div class="input-field">
-          <input id="register-pass-repeat" class="validate" type="password" /><i
-            class="material-icons tiny"
-            >vpn_key</i
-          >
+          <input id="register-pass-repeat" class="validate" type="password" />
           <label for="register-pass-repeat">Повторите пароль</label
           ><small>Введите пароль</small>
         </div>

@@ -289,9 +289,6 @@ export default {
     this.lastname = this.$store.getters['user-data/user'].lastname
   },
   mounted() {
-    this.$materialize.select()
-    this.$materialize.updateTextField()
-
     if (this.user.name.length === 0 || this.user.lastname.length === 0) {
       this.isHidden = true
     }

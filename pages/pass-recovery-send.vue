@@ -4,10 +4,7 @@
       <h1 class="title title-middle">Восстановить пароль</h1>
       <div class="form-group">
         <div class="input-field">
-          <input id="register-email" class="validate" type="email" /><i
-            class="material-icons tiny"
-            >email</i
-          >
+          <input id="register-email" class="validate" type="email" />
           <label for="register-email">Email</label><small>Введите email</small>
         </div>
         <button

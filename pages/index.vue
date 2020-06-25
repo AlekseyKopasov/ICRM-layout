@@ -33,6 +33,11 @@
       <li>
         <nuxt-link to="/modal">modal.html --- Модальное окно</nuxt-link>
       </li>
+      <li>
+        <nuxt-link to="/vuetify-test"
+          >vuetify-test.html --- Пустой лейаут</nuxt-link
+        >
+      </li>
     </ul>
   </div>
 </template>

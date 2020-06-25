@@ -12,11 +12,6 @@ input[type=password]:not(.browser-default) {
 
   &:hover {
     opacity: 0.5;
-
-    & + .material-icons {
-      transition: opacity $transition-props;
-      opacity: 0.5;
-    }
   }
 
   &:focus {
@@ -24,29 +19,11 @@ input[type=password]:not(.browser-default) {
     border-bottom: 1px solid $color-blue;
     box-shadow: 0 1px 0 0 $color-blue;
 
-    & + label,
-    & + .material-icons {
+    &+label {
       transition: opacity $transition-props;
       opacity: 1;
       color: $color-blue;
     }
-  }
-
-}
-
-input.invalid[type=email]:not(.browser-default),
-input.invalid[type=email]:not(.browser-default):focus,
-input.invalid[type=password]:not(.browser-default)
-input.invalid[type=password]:not(.browser-default):focus {
-  & + .material-icons {
-    color: $color-danger;
-  }
-}
-
-input.valid[type=email]:not(.browser-default),
-input.valid[type=password]:not(.browser-default){
-  & + .material-icons {
-    color: $color-green;
   }
 }
 
@@ -54,15 +31,8 @@ label {
   font-size: 16px;
 }
 
-.input-field > label:not(.label-icon).active {
+.input-field>label:not(.label-icon).active {
   transform: translateY(0) scale(0.8);
-}
-
-.material-icons {
-  position: absolute;
-  top: 15px;
-  right: 5px;
-  color: $color-gray;
 }
 
 small {

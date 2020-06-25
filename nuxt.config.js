@@ -23,21 +23,12 @@ export default {
       // { rel: 'preload', href: '/assets/fonts/PTSans-regular.woff2', as: 'font', crossorigin: 'anonymous' },
       // { rel: 'preload', href: '/assets/fonts/Tenor_Sans_regular.woff2', as: 'font', crossorigin: 'anonymous' },
       {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
-      },
-      {
         rel: 'icon',
         type: 'image/x-icon',
         href: '/favicon.ico',
       },
     ],
-    script: [
-      {
-        src:
-          'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js',
-      },
-    ],
+    script: [],
   },
   /*
    ** Customize the progress-bar color
@@ -52,7 +43,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/materialize', '@/plugins/eventBus'],
+  plugins: ['@/plugins/eventBus'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -61,6 +52,7 @@ export default {
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
+    '@nuxtjs/vuetify',
   ],
   /*
    ** Nuxt.js modules
@@ -77,8 +69,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    // vendor: ['materialize-plugin'],
-    // plugins: ['plugins/materialize-plugin'],
 
     extend(config, ctx) {},
   },

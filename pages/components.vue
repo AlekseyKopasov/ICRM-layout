@@ -24,24 +24,15 @@
           <h2 class="title title-middle title-ui">Поля формы</h2>
           <div class="form-group">
             <div class="input-field">
-              <input id="email" class="validate" type="email" /><i
-                class="material-icons tiny"
-                >email</i
-              >
+              <input id="email" class="validate" type="email" />
               <label for="email">Email</label><small>Введите email</small>
             </div>
             <div class="input-field">
-              <input id="pass" class="validate" type="password" /><i
-                class="material-icons tiny"
-                >vpn_key</i
-              >
+              <input id="pass" class="validate" type="password" />
               <label for="pass">Пароль</label><small>Введите пароль</small>
             </div>
             <div class="input-field">
-              <input id="pass-repeat" class="validate" type="password" /><i
-                class="material-icons tiny"
-                >vpn_key</i
-              >
+              <input id="pass-repeat" class="validate" type="password" />
               <label for="pass-repeat">Повторите пароль</label
               ><small>Введите пароль</small>
             </div>
