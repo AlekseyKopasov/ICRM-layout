@@ -22,5 +22,3 @@ export const actions = {
     commit('setUser', user)
   },
 }
-
-console.log(123)

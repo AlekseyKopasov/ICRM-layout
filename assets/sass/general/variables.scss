@@ -39,7 +39,6 @@ $color-theme-purple: var(--purple);
 $color-theme-bg-light: var(--light);
 $color-theme-bg-dark: var(--dark);
 
-
 $width-max: 1920px;
 $width-desktop-m: 1600px;
 $width-desktop: 1440px;
@@ -62,3 +61,6 @@ $font-base-line-height: 24px;
 $transition-duration: 0.3s;
 $transition-timing-function: cubic-bezier(0.79, 0.14, 0.15, 0.86);
 $transition-props: $transition-duration $transition-timing-function;
+
+// @import '.~vuetify/src/styles/main';
+// $btn-border-radius: 5px;

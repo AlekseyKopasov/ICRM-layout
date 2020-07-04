@@ -1,0 +1,29 @@
+@import './variables.scss';
+
+$body-font-family: $main-font;
+$heading-font-family: $title-font;
+
+// $font-size-root: $font-base;
+$font-size-root: $font-base;
+
+// $headings: (
+//   'h1': (
+//     'size': 54px !important,
+//     'line-height': 1.15em,
+//   ),
+// );
+
+// @each $heading, $style in $headings {
+//   $headings: map-merge(
+//     $headings,
+//     (
+//       $heading:
+//         map-merge(
+//           $style,
+//           (
+//             'font-family': $heading-font-family,
+//           )
+//         ),
+//     )
+//   );
+// }

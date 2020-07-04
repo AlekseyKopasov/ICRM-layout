@@ -1,6 +1,6 @@
 input,
-input[type=email]:not(.browser-default),
-input[type=password]:not(.browser-default) {
+input[type='email']:not(.browser-default),
+input[type='password']:not(.browser-default) {
   height: auto;
   margin: 0;
   padding: 10px 0;
@@ -19,7 +19,7 @@ input[type=password]:not(.browser-default) {
     border-bottom: 1px solid $color-blue;
     box-shadow: 0 1px 0 0 $color-blue;
 
-    &+label {
+    & + label {
       transition: opacity $transition-props;
       opacity: 1;
       color: $color-blue;
@@ -31,9 +31,9 @@ label {
   font-size: 16px;
 }
 
-.input-field>label:not(.label-icon).active {
-  transform: translateY(0) scale(0.8);
-}
+// .input-field > label:not(.label-icon).active {
+//   transform: translateY(0) scale(0.8);
+// }
 
 small {
   display: none;

@@ -1,45 +1,86 @@
 <template>
   <main class="login-page login-page--register">
-    <form action="/" method="POST">
+    <v-form ref="form" v-model="valid" :lazy-validation="lazy" method="POST">
       <h1 class="title title-middle">Регистрация</h1>
-      <div class="form-group">
-        <div class="input-field">
-          <input id="register-email" class="validate" type="email" />
-          <label for="register-email">Email</label><small>Введите email</small>
-        </div>
-        <div class="input-field">
-          <input id="register-pass" class="validate" type="password" />
-          <label for="register-pass">Пароль</label><small>Введите пароль</small>
-        </div>
-        <div class="input-field">
-          <input id="register-pass-repeat" class="validate" type="password" />
-          <label for="register-pass-repeat">Повторите пароль</label
-          ><small>Введите пароль</small>
-        </div>
-        <button
-          class="btn btn-green waves-effect waves-light"
-          type="submit"
-          name="action"
-        >
-          Зарегистрироваться
-        </button>
-      </div>
-      <div class="form-group form-group__has-account">
+
+      <v-text-field
+        v-model="email"
+        :rules="emailRules"
+        label="E-mail"
+        type="email"
+        required
+      ></v-text-field>
+
+      <v-text-field
+        v-model="pass"
+        :rules="passRules"
+        label="Пароль"
+        type="password"
+        required
+      ></v-text-field>
+
+      <v-text-field
+        v-model="passRepeat"
+        :rules="passRepeatRules"
+        label="Повторите пароль"
+        type="password"
+        required
+      ></v-text-field>
+
+      <v-btn
+        class="btn-green"
+        :disabled="valid"
+        type="submit"
+        color="success"
+        @click="validate"
+      >
+        Зарегистрироваться
+      </v-btn>
+
+      <div class="form__has-account">
         <p>Уже есть аккаут?</p>
-        <button
-          class="btn waves-effect waves-light"
-          type="button"
-          name="action"
-        >
+        <v-btn class="" color="info" type="button">
           Войти
-        </button>
+        </v-btn>
       </div>
-    </form>
+    </v-form>
   </main>
 </template>
 
 <script>
 export default {
   layout: 'empty',
+  data: () => ({
+    valid: true,
+    email: '',
+    pass: '',
+    passRepeat: '',
+    emailRules: [
+      v => !!v || 'Введите E-mail',
+      v => /.+@.+\..+/.test(v) || 'Введите корректный E-mail',
+    ],
+    passRules: [
+      v => !!v || 'Введите пароль',
+      v => (v && v.length >= 6) || 'Пароль не может быть короче 6 символов',
+    ],
+    passRepeatRules: [
+      v => !!v || 'Повторите пароль',
+      // v => v !== this. || 'Введите корректный E-mail',
+    ],
+    lazy: false,
+  }),
+  methods: {
+    validate() {
+      this.$refs.form.validate()
+    },
+  },
 }
 </script>
+
+<style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css?family=Questrial');
+
+.v-application {
+  font-family: 'Questrial' !important;
+}
+</style>
