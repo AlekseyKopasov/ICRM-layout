@@ -5,7 +5,8 @@ export default {
    */
   head: {
     title: process.env.npm_package_name || '',
-    meta: [{
+    meta: [
+      {
         charset: 'utf-8'
       },
       {
@@ -31,9 +32,12 @@ export default {
         href: '/favicon.ico'
       }
     ],
-    script: [{
-      src: 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'
-    }]
+    script: [
+      {
+        src:
+          'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color

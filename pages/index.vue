@@ -24,6 +24,9 @@
         <nuxt-link to="/profile">profile.html --- Профиль</nuxt-link>
       </li>
       <li>
+        <nuxt-link to="/contacts">contacts.html --- Контакты</nuxt-link>
+      </li>
+      <li>
         <nuxt-link to="/modal">modal.html --- Модальное окно</nuxt-link>
       </li>
       <hr />

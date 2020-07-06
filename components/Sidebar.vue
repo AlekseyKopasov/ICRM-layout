@@ -9,7 +9,11 @@
       <span></span>
     </button>
     <ul class="sidebar__menu">
-      <li v-for="(item, index) of menu" :key="index" class="sidebar__menu-item">
+      <li
+        v-for="(item, index) of sidebarList"
+        :key="index"
+        class="sidebar__menu-item"
+      >
         <nuxt-link class="sidebar__menu-link" :to="item.link">
           <span class="sidebar__menu-icon">{{ item.icon }}</span>
           <span class="sidebar__menu-title">{{ item.title }}</span>
@@ -20,13 +24,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
+  name: 'Sidebar',
   data: () => ({
     isCollapsed: false
   }),
   computed: {
-    menu() {
-      return this.$store.getters['sidebar-menu/menu']
+    ...mapGetters({ menu: 'sidebar-menu/menu' }),
+
+    sidebarList() {
+      return this.menu
     }
   },
   methods: {

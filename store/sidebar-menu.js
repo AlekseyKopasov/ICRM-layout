@@ -3,32 +3,27 @@ export const state = () => ({
     {
       icon: '',
       title: 'Планирование',
-      link: '#'
+      link: 'Planning'
     },
     {
       icon: '',
       title: 'Календарь',
-      link: '#'
+      link: 'Calendar'
     },
     {
       icon: '',
       title: 'Заказы',
-      link: '#'
+      link: 'Orders'
     },
     {
       icon: '',
       title: 'Контакты',
-      link: '#'
+      link: 'Contacts'
     },
     {
       icon: '',
       title: 'История',
-      link: '#'
-    },
-    {
-      icon: '',
-      title: 'Полезное',
-      link: '#'
+      link: 'History'
     }
   ]
 })

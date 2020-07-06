@@ -1,10 +1,10 @@
-.contacts-table td {
+.contacts-table__table td {
   &:first-of-type {
     position: relative;
   }
 }
 
-.contacts-table tr {
+.contacts-table__table tr {
   position: relative;
   height: 100%;
 
@@ -15,31 +15,31 @@
   }
 }
 
-.contacts-table__list {
-  display: flex;
-  flex-direction: column;
-}
+// .contacts-table__list {
+//   display: flex;
+//   flex-direction: column;
+// }
 
-.contacts-table__list li {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-bottom: 1px solid $color-gray;
+// .contacts-table__list li {
+//   padding: 10px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   border-bottom: 1px solid $color-gray;
 
-  &:last-child {
-    border-bottom: none;
-  }
-}
+//   &:last-child {
+//     border-bottom: none;
+//   }
+// }
 
-.contacts-table__btn {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-}
+// .contacts-table__btn {
+//   display: flex;
+//   align-items: center;
+//   margin-left: auto;
+// }
 
-.contacts-table .modal-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+// .contacts-table .modal-trigger {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }

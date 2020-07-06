@@ -1,0 +1,100 @@
+// .profile__contacts {
+//   display: flex;
+//   width: 100%;
+//   flex-direction: column;
+// }
+
+// .profile__contacts-header {
+//   width: 100%;
+//   display: flex;
+//   justify-content: center;
+// }
+
+.contacts {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__info-title {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin: 0;
+  margin-bottom: 55px;
+  overflow: hidden;
+}
+
+.profile__info-add-new {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  text-align: center;
+
+  font-size: 18px;
+  font-weight: 400;
+  font-family: $main-font;
+  text-transform: none;
+  text-decoration: underline;
+
+  @include basic-hover-effect();
+
+  &:hover,
+  &:focus {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  transition: opacity $transition-props;
+}
+
+.profile__contacts p {
+  margin-top: 30px;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: $main-font;
+  text-align: center;
+}
+
+.profile__contacts-header h3 {
+  padding: 15px;
+  position: relative;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  cursor: pointer;
+
+  @include basic-hover-effect();
+
+  color: $color-black;
+
+  &:first-child {
+    border-right: 1px solid $color-gray;
+  }
+
+  &.active {
+    position: relative;
+
+    &:hover::after,
+    &:focus::after {
+      @include basic-hover-effect();
+
+      background-color: $color-indigo;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 1px;
+      width: inherit;
+
+      background-color: $color-gray;
+    }
+  }
+}
