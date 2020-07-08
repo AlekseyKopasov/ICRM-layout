@@ -178,7 +178,7 @@ import Modal from '@/components/Modal'
 
 export default {
   name: 'Contacts',
-  layout: 'main-layout',
+  layout: 'main',
   components: {
     ButtonsAction,
     Modal

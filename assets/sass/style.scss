@@ -2,11 +2,7 @@
 @import 'vendor/materialize.min';
 @import 'vendor/simplebar';
 // import global styles
-@import 'general/fonts';
-@import 'general/variables';
-@import 'general/functions';
-@import 'general/mixins';
-@import 'general/global';
+@import 'general/main';
 // import global layout styles
 @import 'layouts/empty-layout';
 @import 'layouts/main-layout';

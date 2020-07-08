@@ -82,7 +82,7 @@
 <script>
 export default {
   name: 'Profile',
-  layout: 'main-layout',
+  layout: 'main',
   data() {
     return {
       isHidden: false,

@@ -6,7 +6,16 @@ const materialize = {
   },
   dropdown(options = {}) {
     const elems = document.querySelectorAll('.dropdown-trigger')
-    M.Dropdown.init(elems, options)
+    elems.forEach(elem => {
+      M.Dropdown.init(elem, options)
+      var instance = M.Dropdown.getInstance(elem)
+
+      for (let opt in options) {
+        if (opt.destroy && opt.destroy === true) {
+          elem.destroy()
+        }
+      }
+    })
   },
   select(options = {}) {
     const elems = document.querySelectorAll('.select')
