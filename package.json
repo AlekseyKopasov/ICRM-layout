@@ -16,7 +16,7 @@
     "@nuxtjs/pwa": "^3.0.0-0",
     "@nuxtjs/svg-sprite": "^0.4.10",
     "normalize.css": "^8.0.1",
-    "nuxt": "^2.0.0"
+    "nuxt": "^3.4.3"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
